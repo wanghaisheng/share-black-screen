@@ -1,0 +1,102 @@
+/* 多语言支持相关样式 */
+
+/* 语言选择器样式 */
+.language-selector {
+    position: relative;
+    margin-left: 20px;
+}
+
+.language-selector select {
+    appearance: none;
+    background-color: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+    color: #fff;
+    cursor: pointer;
+    font-size: 14px;
+    padding: 6px 28px 6px 12px;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.language-selector::after {
+    content: '\f078';
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #fff;
+    pointer-events: none;
+}
+
+.language-selector select:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.language-selector select:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px rgba(var(--primary-rgb), 0.3);
+}
+
+/* 语言加载指示器 */
+.language-loading-indicator {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    display: none;
+}
+
+.language-loading-indicator span {
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background-color: var(--primary-color, #3498db);
+    margin: 0 5px;
+    animation: loading-bounce 1.4s infinite ease-in-out both;
+}
+
+.language-loading-indicator span:nth-child(1) {
+    animation-delay: -0.32s;
+}
+
+.language-loading-indicator span:nth-child(2) {
+    animation-delay: -0.16s;
+}
+
+@keyframes loading-bounce {
+    0%, 80%, 100% {
+        transform: scale(0);
+    }
+    40% {
+        transform: scale(1);
+    }
+}
+
+/* RTL语言支持 */
+html[dir="rtl"] .language-selector::after {
+    right: auto;
+    left: 10px;
+}
+
+html[dir="rtl"] .language-selector select {
+    padding: 6px 12px 6px 28px;
+}
+
+/* 语言切换过渡效果 */
+[data-i18n] {
+    transition: opacity 0.3s ease;
+}
+
+.language-changing [data-i18n] {
+    opacity: 0.5;
+}

@@ -1,231 +1,482 @@
-
-<!DOCTYPE html><html lang="en"><head><meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' 'unsafe-eval' data: blob: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://code.jquery.com https://unpkg.com https://d3js.org https://threejs.org https://cdn.plot.ly https://stackpath.bootstrapcdn.com https://maps.googleapis.com https://cdn.tailwindcss.com https://ajax.googleapis.com https://kit.fontawesome.com https://cdn.datatables.net https://maxcdn.bootstrapcdn.com https://code.highcharts.com https://tako-static-assets-production.s3.amazonaws.com https://www.youtube.com https://fonts.googleapis.com https://fonts.gstatic.com https://pfst.cf2.poecdn.net https://puc.poecdn.net https://i.imgur.com https://wikimedia.org https://*.icons8.com https://*.giphy.com https://picsum.photos https://images.unsplash.com; frame-src 'self' https://www.youtube.com https://trytako.com; child-src 'self'; manifest-src 'self'; worker-src 'self'; upgrade-insecure-requests; block-all-mixed-content;">
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zenscreen - Focus Enhancement Tool</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <style>
-        :root {
-            --primary-color: #5D5CDE;
-            --primary-hover: #4A49B0;
-            --bg-light: #FFFFFF;
-            --bg-dark: #181818;
-            --text-light: #333333;
-            --text-dark: #E0E0E0;
-        }
-        
-        .dark {
-            --bg-color: var(--bg-dark);
-            --text-color: var(--text-dark);
-        }
-        
-        :root:not(.dark) {
-            --bg-color: var(--bg-light);
-            --text-color: var(--text-light);
-        }
-        
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            transition: background-color 0.3s, color 0.3s;
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-        }
-        
-        .primary-btn {
-            background-color: var(--primary-color);
-            color: white;
-            transition: all 0.3s;
-        }
-        
-        .primary-btn:hover {
-            background-color: var(--primary-hover);
-        }
-        
-        #blackScreen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: #000000;
-            z-index: 1000;
-            opacity: 0.8;
-            pointer-events: none;
-            display: none;
-            transition: opacity 0.5s;
-        }
-        
-        .controls {
-            position: relative;
-            z-index: 1001;
-            pointer-events: auto;
-        }
-        
-        #controlPanel {
-            transition: opacity 0.3s;
-        }
-        
-        input[type="range"] {
-            -webkit-appearance: none;
-            width: 100%;
-            height: 8px;
-            border-radius: 5px;
-            background: #d3d3d3;
-            outline: none;
-        }
-        
-        input[type="range"]::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            appearance: none;
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            background: var(--primary-color);
-            cursor: pointer;
-        }
-        
-        input[type="range"]::-moz-range-thumb {
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            background: var(--primary-color);
-            cursor: pointer;
-        }
-        
-        .timer-btn {
-            transition: all 0.3s;
-        }
-        
-        .timer-btn.active {
-            background-color: var(--primary-color);
-            color: white;
-        }
-        
-        /* For hidden tooltips */
-        .tooltip {
-            visibility: hidden;
-            position: absolute;
-            background-color: rgba(0,0,0,0.8);
-            color: #fff;
-            text-align: center;
-            padding: 5px 10px;
-            border-radius: 6px;
-            z-index: 1;
-            opacity: 0;
-            transition: opacity 0.3s;
-            width: 120px;
-            bottom: 125%;
-            left: 50%;
-            margin-left: -60px;
-        }
-        
-        .tooltip::after {
-            content: "";
-            position: absolute;
-            top: 100%;
-            left: 50%;
-            margin-left: -5px;
-            border-width: 5px;
-            border-style: solid;
-            border-color: rgba(0,0,0,0.8) transparent transparent transparent;
-        }
-        
-        .has-tooltip:hover .tooltip {
-            visibility: visible;
-            opacity: 1;
-        }
-        
-        /* Animation for black screen toggle */
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 0.8; }
-        }
-        
-        .fadeIn {
-            animation: fadeIn 0.5s forwards;
-        }
-        
-        @keyframes fadeOut {
-            from { opacity: 0.8; }
-            to { opacity: 0; }
-        }
-        
-        .fadeOut {
-            animation: fadeOut 0.5s forwards;
-        }
-        
-        /* Timer display */
-        #timerDisplay {
-            font-family: 'Courier New', monospace;
-        }
-        
-        /* Card styles */
-        .card {
-            background-color: var(--bg-color);
-            border: 1px solid rgba(128, 128, 128, 0.2);
-            transition: all 0.3s;
-        }
-        
-        .dark .card {
-            background-color: #242424;
-        }
-    </style>
-</head>
-<body class="min-h-screen flex flex-col">
-    <!-- Black Screen Overlay -->
-    <div id="blackScreen"></div>
+    <title>ShareBlackScreen - 解锁专注力的游戏 | 多功能屏幕管理工具</title>
+    <meta name="description" content="ShareBlackScreen是一款专注于提升工作效率的多功能屏幕管理工具，通过游戏化体验帮助你减少干扰、保护视力、提高专注力。立即开始你的专注之旅！">
+    <meta name="keywords" content="专注力工具,黑屏应用,屏幕管理,番茄工作法,专注力游戏,视力保护,工作效率提升">
     
-    <!-- Header -->
-    <header class="py-4 border-b border-gray-200 dark:border-gray-700">
-        <div class="container mx-auto px-4">
-            <div class="flex justify-between items-center">
-                <div class="flex items-center">
-                    <h1 class="text-2xl font-bold text-primary-color">
-                        <i class="fas fa-moon mr-2 text-primary-color"></i>
-                        ZenScreen
-                    </h1>
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+    
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/playground.css">
+    <link rel="stylesheet" href="css/social-focus.css">
+    <link rel="stylesheet" href="css/time-plan.css">
+    <link rel="stylesheet" href="css/i18n.css">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Press+Start+2P&display=swap" rel="stylesheet">
+</head>
+<body>
+
+</section>
+    
+<!-- Playground Section -->
+<section class="playground-section" id="playground">
+    <div class="container">
+        <h2 class="section-title">在线体验 ShareBlackScreen</h2>
+        <p class="section-subtitle">无需下载，立即体验我们的核心功能</p>
+        
+        <div class="playground-container">
+            <div class="playground-controls">
+                <div class="control-group">
+                    <h3>屏幕模式</h3>
+                    <div class="mode-buttons">
+                        <button class="mode-button active" data-mode="black">黑屏</button>
+                        <button class="mode-button" data-mode="white">白屏</button>
+                        <button class="mode-button" data-mode="blue">蓝屏</button>
+                        <button class="mode-button" data-mode="green">绿屏</button>
+                        <button class="mode-button" data-mode="gradient">渐变</button>
+                    </div>
                 </div>
-                <div class="flex items-center space-x-4">
-                    <button id="darkModeToggle" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
-                        <i class="fas fa-moon text-gray-600 dark:text-gray-300"></i>
-                    </button>
+                
+                <div class="control-group">
+                    <h3>透明度调节</h3>
+                    <div class="opacity-control">
+                        <input type="range" id="opacitySlider" min="0" max="100" value="100">
+                        <span id="opacityValue">100%</span>
+                    </div>
+                </div>
+                
+                <div class="control-group">
+                    <h3>时间管理</h3>
+                    <div class="countdown-display-control">
+                        <label class="switch">
+                            <input type="checkbox" id="showCountdownToggle" checked>
+                            <span class="slider round"></span>
+                        </label>
+                        <span>显示倒计时</span>
+                    </div>
+
+
+
+                    <div class="timer-controls">
+                        <div class="timer-presets">
+                            <button class="timer-preset" data-time="5">5分钟</button>
+                            <button class="timer-preset" data-time="25">25分钟</button>
+                            <button class="timer-preset" data-time="50">50分钟</button>
+                            <button id="endTimeBtn" class="timer-preset special">结束时间</button>
+                        </div>
+                        <div class="custom-timer">
+                            <input type="number" id="customTime" min="1" max="120" value="25">
+                            <span>分钟</span>
+                            <button id="startTimer">开始专注</button>
+                        </div>
+                        <!-- 新增结束时间设置 -->
+                        <div class="end-time-picker" id="endTimePicker" style="display: none;">
+                            <input type="time" id="endTimeInput">
+                            <button id="setEndTime">设置结束时间</button>
+                        </div>
+                        <div class="schedule-timer">
+                            <input type="number" id="scheduleTime" min="1" max="1440" value="30">
+                            <span>分钟后启动</span>
+                            <button id="scheduleButton">预约启动</button>
+                        </div>
+                        <div class="schedule-status" id="scheduleStatus"></div>
+                        
+                        <div class="custom-time-plan">
+                            <button id="createTimePlan" class="secondary-button">创建时间方案</button>
+                            <div class="saved-plans" id="savedPlans">
+                                <!-- 已保存的方案将在这里显示 -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="control-group">
+                    <h3>番茄工作法</h3>
+                    <div class="pomodoro-controls">
+                        <button id="startPomodoro">开始番茄工作法</button>
+                        <div class="pomodoro-status">
+                            <span id="pomodoroStatus">准备就绪</span>
+                            <span id="pomodoroTime">25:00</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="control-group">
+                    <h3>社交专注</h3>
+                    <div class="social-focus-controls">
+                        <div class="focus-session">
+                            <h4>创建专注会话</h4>
+                            <input type="text" id="sessionName" placeholder="专注会话名称" maxlength="20">
+                            <button id="createSession" class="primary-button">创建专注会话</button>
+                        </div>
+                        <div class="invite-friends">
+                            <h4>邀请好友</h4>
+                            <input type="text" id="friendEmail" placeholder="好友邮箱地址">
+                            <button id="inviteFriend" class="secondary-button">邀请好友</button>
+                        </div>
+                        <div class="active-session" id="activeSession" style="display: none;">
+                            <div class="session-info">
+                                <h4>当前会话: <span id="currentSessionName">-</span></h4>
+                                <div class="session-code">会话码: <span id="sessionCode">-</span></div>
+                            </div>
+                            <div class="session-members">
+                                <h4>参与成员 (<span id="memberCount">1</span>)</h4>
+                                <ul id="membersList">
+                                    <li class="member-item">
+                                        <span class="member-name">我 (主持人)</span>
+                                        <span class="member-status">专注中</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="session-stats" id="sessionStats">
+                                <div class="stat-item">
+                                    <span class="stat-value">1</span>
+                                    <span class="stat-label">总成员</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-value">1</span>
+                                    <span class="stat-label">专注中</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-value">0</span>
+                                    <span class="stat-label">已完成</span>
+                                </div>
+                            </div>
+                            <div class="sync-control">
+                                <label class="switch">
+                                    <input type="checkbox" id="syncToggle">
+                                    <span class="slider round"></span>
+                                </label>
+                                <span>同步专注状态</span>
+                            </div>
+                            <div class="chat-container" id="chatContainer">
+                                <h4>会话聊天</h4>
+                                <div class="chat-messages" id="chatMessages"></div>
+                                <div class="chat-input-container">
+                                    <input type="text" id="chatInput" placeholder="输入消息...">
+                                    <button id="sendMessage">发送</button>
+                                </div>
+                            </div>
+                            <div class="session-actions">
+                                <button id="leaveSession" class="danger-button">退出会话</button>
+                                <button id="copyInviteLink" class="secondary-button">复制邀请链接</button>
+                            </div>
+                        </div>
+                        <div class="join-session">
+                            <h4>加入专注小组</h4>
+                            <input type="text" id="joinCode" placeholder="输入会话码">
+                            <button id="joinSession" class="primary-button">加入会话</button>
+                        </div>
+                        
+                        <!-- 添加专注排行榜部分 -->
+                        <div class="focus-leaderboard">
+                            <h4>专注排行榜</h4>
+                            <div class="leaderboard-container" id="leaderboardContainer">
+                                <div class="leaderboard-header">
+                                    <span class="rank-column">排名</span>
+                                    <span class="name-column">用户</span>
+                                    <span class="time-column">专注时间</span>
+                                </div>
+                                <ul class="leaderboard-list" id="leaderboardList">
+                                    <!-- 排行榜数据将通过JavaScript动态加载 -->
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="playground-preview">
+                <div class="screen-preview" id="screenPreview">
+                    <div class="preview-content">
+                        <div class="preview-timer" id="previewTimer">25:00</div>
+                        <div class="preview-message" style="display: none;">专注模式已启动</div>
+                    </div>
+                </div>
+                <button class="screen-mode" data-mode="fullscreen">全屏</button>
+
+                <!-- 示例：为元素添加data-i18n属性 -->
+                <h1 data-i18n="hero_title">解锁专注力的游戏</h1>
+                <h2 data-i18n="hero_subtitle">多功能屏幕管理工具，让专注成为一种享受</h2>
+                <p data-i18n="hero_description">ShareBlackScreen 帮助你减少干扰、保护视力、提高专注力，并通过社交分享功能，让专注成为一种可共享的体验。</p>
+                
+                <!-- 专注统计部分 -->
+                <div class="preview-stats">
+                    <div class="stat-item">
+                        <span class="stat-label" data-i18n="today_focus">今日专注</span>
+                        <span class="stat-value" id="todayFocus">0分钟</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label" data-i18n="week_focus">本周专注</span>
+                        <span class="stat-value" id="weekFocus">0分钟</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label" data-i18n="focus_count">专注次数</span>
+                        <span class="stat-value" id="focusCount">0次</span>
+                    </div>
                 </div>
             </div>
         </div>
-    </header>
+        
+        <div class="playground-cta">
+            <p>想要体验更多高级功能？</p>
+            <a href="#download" class="primary-button">立即下载完整版</a>
+        </div>
+    </div>
+</section>
+
+<!-- Testimonials Section -->
     
+
     <!-- Hero Section -->
-    <section class="py-16 bg-gradient-to-r from-indigo-50 to-purple-50 dark:from-gray-900 dark:to-indigo-950">
-        <div class="container mx-auto px-4">
-            <div class="flex flex-col md:flex-row items-center max-w-6xl mx-auto">
-                <div class="md:w-1/2 mb-8 md:mb-0 md:pr-8">
-                    <h1 class="text-4xl md:text-5xl font-bold mb-4 leading-tight">Focus Better, <span class="text-primary-color">Work Smarter</span></h1>
-                    <p class="text-lg mb-6 text-gray-700 dark:text-gray-300">
-                        ZenScreen helps you eliminate visual distractions, reduce eye strain, and save energy with a customizable black screen overlay.
-                    </p>
-                    <div class="flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-4">
-                        <button id="heroToggleButton" class="primary-btn rounded-full py-3 px-8 font-medium flex items-center justify-center">
-                            <i class="fas fa-eye-slash mr-2"></i>
-                            Try Now
-                        </button>
-                        <a href="#features" class="border border-gray-300 dark:border-gray-600 rounded-full py-3 px-8 font-medium flex items-center justify-center hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
-                            <i class="fas fa-info-circle mr-2"></i>
-                            Learn More
+    <header class="hero-section">
+        <div class="container">
+            <nav class="navbar">
+                <!-- 修改 logo 图片 -->
+                <div class="logo">
+                    <img src="img/logo.png" alt="ShareBlackScreen Logo" width="180" height="40">
+                </div>
+                
+                <div class="nav-cta">
+                    <a href="#download" class="cta-button pulse-animation">立即下载</a>
+                </div>
+            </nav>
+            
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1>解锁专注力的游戏</h1>
+                    <h2>多功能屏幕管理工具，让专注成为一种享受</h2>
+                    <p>ShareBlackScreen 帮助你减少干扰、保护视力、提高专注力，并通过社交分享功能，让专注成为一种可共享的体验。</p>
+                    
+                    <div class="hero-cta">
+                        <a href="#download" class="primary-button glow-animation">
+                            <i class="fas fa-download"></i> 免费开始专注之旅
+                        </a>
+                        <a href="#features" class="secondary-button">
+                            <i class="fas fa-info-circle"></i> 了解更多
                         </a>
                     </div>
+                    
+                    <div class="hero-stats">
+                        <div class="stat-item">
+                            <span class="stat-number">50,000+</span>
+                            <span class="stat-label">活跃用户</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">4.8</span>
+                            <span class="stat-label">用户评分</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">1M+</span>
+                            <span class="stat-label">专注小时</span>
+                        </div>
+                    </div>
                 </div>
-                <div class="md:w-1/2">
-                    <div class="relative rounded-xl overflow-hidden shadow-2xl">
-                        <div class="aspect-w-16 aspect-h-9 bg-gray-200 dark:bg-gray-800">
-                            <img src="https://images.unsplash.com/photo-1544027993-37dbfe43562a?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=MnwxfDB8MXxyYW5kb218MHx8Y29tcHV0ZXJ8fHx8fHwxNjU4MzMzMjgw&amp;ixlib=rb-1.2.1&amp;q=80&amp;utm_campaign=api-credit&amp;utm_medium=referral&amp;utm_source=unsplash_source&amp;w=1080" alt="Person using ZenScreen for focus" class="object-cover w-full h-full opacity-80">
-                            <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
-                                <div class="text-white text-center p-6">
-                                    <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-primary-color bg-opacity-80 flex items-center justify-center">
-                                        <i class="fas fa-play text-xl"></i>
-                                    </div>
-                                    <p class="text-lg font-medium">See how it works</p>
-                                </div>
+                
+                <!-- 修改 Hero 部分的图片 -->
+                <div class="hero-image">
+                    <img src="img/hero-app.png" alt="ShareBlackScreen 应用预览" width="600" height="400" loading="lazy">
+                    <div class="floating-badge limited-offer">
+                        <span class="badge-text">限时优惠</span>
+                        <span class="badge-discount">50% OFF</span>
+                        <div class="countdown-timer" id="heroCountdown">23:59:59</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="hero-particles" id="particles-js"></div>
+    </header>
+    
+    <!-- Pain Points Section -->
+    <section class="pain-points-section" id="pain-points">
+        <div class="container">
+            <h2 class="section-title">你是否经常面临这些问题？</h2>
+            
+            <div class="pain-points-grid">
+                <div class="pain-point-card">
+                    <div class="pain-point-icon">
+                        <i class="fas fa-eye-slash"></i>
+                    </div>
+                    <h3>视力疲劳</h3>
+                    <p>长时间盯着屏幕导致眼睛干涩、疲劳，甚至头痛</p>
+                </div>
+                
+                <div class="pain-point-card">
+                    <div class="pain-point-icon">
+                        <i class="fas fa-bell"></i>
+                    </div>
+                    <h3>不断分心</h3>
+                    <p>社交媒体通知、邮件提醒不断打断工作流</p>
+                </div>
+                
+                <div class="pain-point-card">
+                    <div class="pain-point-icon">
+                        <i class="fas fa-hourglass-half"></i>
+                    </div>
+                    <h3>时间管理差</h3>
+                    <p>无法有效规划和追踪专注时间，效率低下</p>
+                </div>
+                
+                <div class="pain-point-card">
+                    <div class="pain-point-icon">
+                        <i class="fas fa-users-slash"></i>
+                    </div>
+                    <h3>缺乏激励</h3>
+                    <p>独自专注缺乏动力，难以坚持良好习惯</p>
+                </div>
+            </div>
+            
+            <div class="pain-points-cta">
+                <a href="#solution" class="scroll-button">
+                    <span>发现解决方案</span>
+                    <i class="fas fa-chevron-down"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Solution Section -->
+    <section class="solution-section" id="solution">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">ShareBlackScreen：专注力提升的游戏化解决方案</h2>
+                <p class="section-subtitle">一款革命性的屏幕管理工具，将专注变成一场有趣的游戏</p>
+            </div>
+            
+            <div class="video-container">
+                <video controls poster="img/video-poster.webp" width="800" height="450">
+                    <source src="video/shareblackscreen-demo.mp4" type="video/mp4">
+                    您的浏览器不支持视频标签。
+                </video>
+                <div class="video-overlay">
+                    <button class="play-button" id="playVideo">
+                        <i class="fas fa-play"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="solution-benefits">
+                <div class="benefit-card">
+                    <img src="img/eye-protection.webp" alt="保护视力" width="80" height="80">
+                    <h3>保护视力</h3>
+                    <p>多种屏幕模式减少蓝光伤害，缓解眼部疲劳</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <img src="img/focus-boost.webp" alt="提升专注力" width="80" height="80">
+                    <h3>提升专注力</h3>
+                    <p>屏蔽干扰，创造理想的专注环境</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <img src="img/time-management.webp" alt="时间管理" width="80" height="80">
+                    <h3>时间管理</h3>
+                    <p>内置番茄工作法，优化工作休息循环</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <img src="img/social-motivation.webp" alt="社交激励" width="80" height="80">
+                    <h3>社交激励</h3>
+                    <p>与朋友共同专注，互相激励进步</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Features Section -->
+    <section class="features-section" id="features">
+        <div class="container">
+            <h2 class="section-title">游戏化功能，提升专注体验</h2>
+            
+            <div class="feature-tabs">
+                <div class="tab-navigation">
+                    <button class="tab-button active" data-tab="screen-modes">屏幕模式</button>
+                    <button class="tab-button" data-tab="time-management">时间管理</button>
+                    <button class="tab-button" data-tab="social-features">社交功能</button>
+                    <button class="tab-button" data-tab="data-analysis">数据分析</button>
+                </div>
+                
+                <div class="tab-content">
+                    <div class="tab-pane active" id="screen-modes">
+                        <div class="feature-content">
+                            <div class="feature-text">
+                                <h3>多样化屏幕模式</h3>
+                                <ul class="feature-list">
+                                    <li><i class="fas fa-check-circle"></i> <strong>黑屏模式</strong>：提供纯黑屏幕，减少视觉干扰</li>
+                                    <li><i class="fas fa-check-circle"></i> <strong>彩色模式</strong>：支持多种颜色选项（黑色、白色、蓝色、绿色等）</li>
+                                    <li><i class="fas fa-check-circle"></i> <strong>透明度调节</strong>：允许用户调整屏幕透明度（0%-100%）</li>
+                                    <li><i class="fas fa-check-circle"></i> <strong>渐变模式</strong>：支持双色渐变效果</li>
+                                </ul>
+                                <a href="#download" class="feature-cta">立即体验多样化屏幕模式</a>
+                            </div>
+                            <div class="feature-image">
+                                <img src="img/screen-modes.webp" alt="多样化屏幕模式" width="500" height="300" loading="lazy">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="tab-pane" id="time-management">
+                        <div class="feature-content">
+                            <div class="feature-text">
+                                <h3>时间管理功能</h3>
+                                <ul class="feature-list">
+                                    <li><i class="fas fa-check-circle"></i> <strong>定时器</strong>：设置屏幕模式自动切换时间</li>
+                                    <li><i class="fas fa-check-circle"></i> <strong>番茄工作法</strong>：内置25/5分钟工作休息循环</li>
+                                    <li><i class="fas fa-check-circle"></i> <strong>自定义时间段</strong>：允许用户创建个性化时间管理方案</li>
+                                    <li><i class="fas fa-check-circle"></i> <strong>专注提醒</strong>：智能提醒休息和恢复专注</li>
+                                </ul>
+                                <a href="#download" class="feature-cta">立即体验时间管理功能</a>
+                            </div>
+                            <div class="feature-image">
+                                <img src="img/time-management-feature.webp" alt="时间管理功能" width="500" height="300">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="social-features">
+                        <div class="feature-content">
+                            <div class="feature-text">
+                                <h3>社交分享功能</h3>
+                                <ul class="feature-list">
+                                    <li><i class="fas fa-check-circle"></i> <strong>专注状态分享</strong>：分享当前专注状态到社交媒体</li>
+                                    <li><i class="fas fa-check-circle"></i> <strong>专注小组</strong>：创建或加入专注小组，与朋友共同保持专注</li>
+                                    <li><i class="fas fa-check-circle"></i> <strong>专注排行榜</strong>：展示好友间的专注时间排名</li>
+                                    <li><i class="fas fa-check-circle"></i> <strong>成就系统</strong>：解锁专注成就，获得虚拟奖励</li>
+                                </ul>
+                                <a href="#download" class="feature-cta">立即体验社交分享功能</a>
+                            </div>
+                            <div class="feature-image">
+                                <img src="img/social-features.webp" alt="社交分享功能" width="500" height="300">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="tab-pane" id="data-analysis">
+                        <div class="feature-content">
+                            <div class="feature-text">
+                                <h3>数据统计与分析</h3>
+                                <ul class="feature-list">
+                                    <li><i class="fas fa-check-circle"></i> <strong>专注时间统计</strong>：记录每日/每周/每月专注时间</li>
+                                    <li><i class="fas fa-check-circle"></i> <strong>专注习惯分析</strong>：分析用户专注模式和最佳专注时段</li>
+                                    <li><i class="fas fa-check-circle"></i> <strong>目标设定与追踪</strong>：设定专注时间目标并追踪完成情况</li>
+                                    <li><i class="fas fa-check-circle"></i> <strong>进度可视化</strong>：通过图表直观展示专注进度</li>
+                                </ul>
+                                <a href="#download" class="feature-cta">立即体验数据分析功能</a>
+                            </div>
+                            <div class="feature-image">
+                                <img src="img/data-analysis.webp" alt="数据统计与分析" width="500" height="300">
                             </div>
                         </div>
                     </div>
@@ -233,709 +484,481 @@
             </div>
         </div>
     </section>
-
-    <!-- Main Content -->
-    <main class="flex-grow">
-        <div class="container mx-auto px-4 py-8">
-            <div class="max-w-3xl mx-auto">
-                <!-- Main Control Panel -->
-                <div id="controlPanel" class="card rounded-lg shadow-lg p-6 mb-8">
-                    <div class="flex flex-col md:flex-row md:items-center justify-between mb-6">
-                        <h2 class="text-xl font-semibold mb-2 md:mb-0">Focus Mode Controls</h2>
-                        <div>
-                            <button id="toggleButton" class="primary-btn rounded-full py-2 px-6 font-medium flex items-center">
-                                <i id="toggleIcon" class="fas fa-eye-slash mr-2"></i>
-                                <span id="toggleText">Activate Black Screen</span>
-                            </button>
-                        </div>
+    
+    <!-- Testimonials Section -->
+    <section class="testimonials-section" id="testimonials">
+        <div class="container">
+            <h2 class="section-title">用户如何评价我们</h2>
+            <p class="section-subtitle">来自真实用户的专注体验分享</p>
+            
+            <div class="testimonials-slider" id="testimonialsSlider">
+                <div class="testimonial-card">
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
                     </div>
-                    
-                    <!-- Opacity Control -->
-                    <div class="mb-6">
-                        <label for="opacitySlider" class="block mb-2 font-medium">Screen Darkness</label>
-                        <div class="flex items-center">
-                            <span class="mr-3"><i class="fas fa-sun"></i></span>
-                            <input type="range" id="opacitySlider" min="30" max="100" value="80" class="flex-grow">
-                            <span class="ml-3"><i class="fas fa-moon"></i></span>
+                    <p class="testimonial-text">"ShareBlackScreen彻底改变了我的工作方式！多样化的屏幕模式让我的眼睛不再疲劳，番茄工作法功能帮助我更有效地管理时间。强烈推荐给所有需要提高专注力的人！"</p>
+                    <div class="testimonial-author">
+                        <img src="img/user-1.webp" alt="张明" class="author-avatar" width="60" height="60">
+                        <div class="author-info">
+                            <h4>张明</h4>
+                            <p>自由职业者</p>
                         </div>
-                        <p class="text-sm text-gray-500 dark:text-gray-400 mt-2">
-                            Adjust the darkness level to find your optimal setting for eye comfort and focus.
-                        </p>
-                    </div>
-                    
-                    <!-- Timer Control -->
-                    <div>
-                        <label class="block mb-2 font-medium">Timer Settings</label>
-                        <div class="flex flex-wrap gap-2 mb-3">
-                            <button class="timer-btn px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md text-sm" data-time="5">5 min</button>
-                            <button class="timer-btn px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md text-sm" data-time="10">10 min</button>
-                            <button class="timer-btn px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md text-sm" data-time="15">15 min</button>
-                            <button class="timer-btn px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md text-sm" data-time="25">25 min</button>
-                            <button class="timer-btn px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md text-sm" data-time="30">30 min</button>
-                            <button class="timer-btn px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md text-sm" data-time="60">1 hour</button>
-                        </div>
-                        
-                        <div id="timerControls" class="flex items-center gap-4">
-                            <div id="timerDisplay" class="text-2xl font-mono">00:00</div>
-                            <button id="startTimer" class="primary-btn rounded-md py-1 px-4 text-sm">Start</button>
-                            <button id="resetTimer" class="border border-gray-300 dark:border-gray-600 rounded-md py-1 px-4 text-sm">Reset</button>
-                        </div>
-                        
-                        <p class="text-sm text-gray-500 dark:text-gray-400 mt-2">
-                            Set a timer to automatically activate black screen for focused work sessions.
-                        </p>
                     </div>
                 </div>
                 
-                <!-- Information Cards -->
-                <div class="grid md:grid-cols-2 gap-6">
-                    <!-- Energy Saving Tips -->
-                    <div class="card rounded-lg shadow-md p-5">
-                        <div class="flex items-center mb-4">
-                            <i class="fas fa-bolt text-yellow-500 text-xl mr-3"></i>
-                            <h3 class="text-lg font-semibold">Energy Saving Tips</h3>
-                        </div>
-                        <ul class="space-y-2 text-sm">
-                            <li class="flex items-start">
-                                <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
-                                <span><strong>OLED Screens:</strong> Black pixels use significantly less power, maximizing battery life.</span>
-                            </li>
-                            <li class="flex items-start">
-                                <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
-                                <span><strong>Reduce Brightness:</strong> Lower screen brightness for additional energy savings.</span>
-                            </li>
-                            <li class="flex items-start">
-                                <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
-                                <span><strong>Close Background Apps:</strong> Limit unnecessary apps and processes.</span>
-                            </li>
-                        </ul>
+                <div class="testimonial-card">
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
                     </div>
-                    
-                    <!-- Keyboard Shortcuts -->
-                    <div class="card rounded-lg shadow-md p-5">
-                        <div class="flex items-center mb-4">
-                            <i class="fas fa-keyboard text-primary-color text-xl mr-3"></i>
-                            <h3 class="text-lg font-semibold">Keyboard Shortcuts</h3>
+                    <p class="testimonial-text">"作为一名程序员，我经常需要长时间盯着屏幕。ShareBlackScreen的黑屏模式和定时休息提醒功能极大地减轻了我的视觉疲劳。社交功能也很棒，能和同事一起专注工作！"</p>
+                    <div class="testimonial-author">
+                        <img src="img/user-2.webp" alt="李华" class="author-avatar" width="60" height="60">
+                        <div class="author-info">
+                            <h4>李华</h4>
+                            <p>软件工程师</p>
                         </div>
-                        <ul class="space-y-2 text-sm">
-                            <li class="flex items-start">
-                                <kbd class="bg-gray-200 dark:bg-gray-700 px-2 py-1 rounded text-xs mr-2">Space</kbd>
-                                <span>Toggle black screen on/off</span>
-                            </li>
-                            <li class="flex items-start">
-                                <kbd class="bg-gray-200 dark:bg-gray-700 px-2 py-1 rounded text-xs mr-2">Esc</kbd>
-                                <span>Deactivate black screen</span>
-                            </li>
-                            <li class="flex items-start">
-                                <kbd class="bg-gray-200 dark:bg-gray-700 px-2 py-1 rounded text-xs mr-2">+</kbd>
-                                <span>Increase opacity</span>
-                            </li>
-                            <li class="flex items-start">
-                                <kbd class="bg-gray-200 dark:bg-gray-700 px-2 py-1 rounded text-xs mr-2">-</kbd>
-                                <span>Decrease opacity</span>
-                            </li>
-                        </ul>
                     </div>
                 </div>
                 
-                <!-- How It Works Section -->
-                <div class="mt-8" id="how-it-works">
-                    <h2 class="text-xl font-semibold mb-4">How It Works</h2>
-                    <div class="card rounded-lg shadow-md p-5">
-                        <p class="mb-4">
-                            ZenScreen helps you maintain focus by creating a distraction-free environment through its black screen overlay. Here's how to use it effectively:
-                        </p>
-                        <ol class="space-y-3 list-decimal list-inside">
-                            <li><strong>Activate Black Screen</strong> - Click the "Activate Black Screen" button or press the spacebar to toggle the black overlay.</li>
-                            <li><strong>Adjust Opacity</strong> - Use the slider to find your optimal darkness level for eye comfort.</li>
-                            <li><strong>Set a Timer</strong> - Choose a preset time for focused work sessions, and the black screen will automatically activate.</li>
-                            <li><strong>Use Keyboard Shortcuts</strong> - Control the tool quickly with keyboard shortcuts for a seamless experience.</li>
-                        </ol>
-                        <p class="mt-4 text-sm text-gray-600 dark:text-gray-400">
-                            The black screen helps reduce visual distractions, allowing you to focus on your thoughts or listen without visual interruptions. It's also ideal for reducing eye strain during breaks.
-                        </p>
+                <div class="testimonial-card">
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
                     </div>
+                    <p class="testimonial-text">"我是一名学生，经常被社交媒体分心。ShareBlackScreen帮助我屏蔽干扰，专注学习。数据分析功能让我清楚地看到自己的进步，非常有成就感！"</p>
+                    <div class="testimonial-author">
+                        <img src="img/user-3.webp" alt="王小雨" class="author-avatar" width="60" height="60">
+                        <div class="author-info">
+                            <h4>王小雨</h4>
+                            <p>大学生</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="testimonials-stats">
+                <div class="stat-box">
+                    <span class="stat-number">98%</span>
+                    <span class="stat-text">用户报告专注力提升</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-number">85%</span>
+                    <span class="stat-text">用户视力疲劳减轻</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-number">92%</span>
+                    <span class="stat-text">用户工作效率提高</span>
                 </div>
             </div>
         </div>
-        
-        <!-- Features Section -->
-        <section id="features" class="py-16 bg-gray-50 dark:bg-gray-900">
-            <div class="container mx-auto px-4">
-                <div class="max-w-4xl mx-auto text-center mb-12">
-                    <h2 class="text-3xl font-bold mb-4">Key Features</h2>
-                    <p class="text-lg text-gray-600 dark:text-gray-400">Designed to enhance your focus, protect your eyes, and save energy.</p>
-                </div>
-                
-                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-                    <!-- Feature 1 -->
-                    <div class="card rounded-lg shadow-md p-6 text-center transition-transform hover:scale-105">
-                        <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-primary-color bg-opacity-10 flex items-center justify-center">
-                            <i class="fas fa-focus text-primary-color text-2xl"></i>
-                        </div>
-                        <h3 class="text-xl font-semibold mb-3">Enhanced Focus</h3>
-                        <p class="text-gray-600 dark:text-gray-400">
-                            Block out visual distractions with a customizable black screen overlay to stay focused on your tasks.
-                        </p>
-                    </div>
-                    
-                    <!-- Feature 2 -->
-                    <div class="card rounded-lg shadow-md p-6 text-center transition-transform hover:scale-105">
-                        <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-primary-color bg-opacity-10 flex items-center justify-center">
-                            <i class="fas fa-eye text-primary-color text-2xl"></i>
-                        </div>
-                        <h3 class="text-xl font-semibold mb-3">Eye Protection</h3>
-                        <p class="text-gray-600 dark:text-gray-400">
-                            Reduce eye strain with adjustable darkness levels, especially beneficial during night-time use.
-                        </p>
-                    </div>
-                    
-                    <!-- Feature 3 -->
-                    <div class="card rounded-lg shadow-md p-6 text-center transition-transform hover:scale-105">
-                        <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-primary-color bg-opacity-10 flex items-center justify-center">
-                            <i class="fas fa-battery-full text-primary-color text-2xl"></i>
-                        </div>
-                        <h3 class="text-xl font-semibold mb-3">Energy Saving</h3>
-                        <p class="text-gray-600 dark:text-gray-400">
-                            Save battery life on OLED screens by using true black pixels that consume significantly less power.
-                        </p>
-                    </div>
-                    
-                    <!-- Feature 4 -->
-                    <div class="card rounded-lg shadow-md p-6 text-center transition-transform hover:scale-105">
-                        <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-primary-color bg-opacity-10 flex items-center justify-center">
-                            <i class="fas fa-sliders-h text-primary-color text-2xl"></i>
-                        </div>
-                        <h3 class="text-xl font-semibold mb-3">Customizable</h3>
-                        <p class="text-gray-600 dark:text-gray-400">
-                            Personalize your experience with adjustable darkness levels and timer settings to suit your needs.
-                        </p>
-                    </div>
-                    
-                    <!-- Feature 5 -->
-                    <div class="card rounded-lg shadow-md p-6 text-center transition-transform hover:scale-105">
-                        <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-primary-color bg-opacity-10 flex items-center justify-center">
-                            <i class="fas fa-hourglass-half text-primary-color text-2xl"></i>
-                        </div>
-                        <h3 class="text-xl font-semibold mb-3">Focus Timer</h3>
-                        <p class="text-gray-600 dark:text-gray-400">
-                            Set timers for focused work sessions with preset durations to help manage your time effectively.
-                        </p>
-                    </div>
-                    
-                    <!-- Feature 6 -->
-                    <div class="card rounded-lg shadow-md p-6 text-center transition-transform hover:scale-105">
-                        <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-primary-color bg-opacity-10 flex items-center justify-center">
-                            <i class="fas fa-keyboard text-primary-color text-2xl"></i>
-                        </div>
-                        <h3 class="text-xl font-semibold mb-3">Keyboard Shortcuts</h3>
-                        <p class="text-gray-600 dark:text-gray-400">
-                            Control the tool quickly and efficiently with intuitive keyboard shortcuts for a seamless experience.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </section>
-        
-        <!-- Testimonials Section -->
-        <section class="py-16">
-            <div class="container mx-auto px-4">
-                <div class="max-w-4xl mx-auto text-center mb-12">
-                    <h2 class="text-3xl font-bold mb-4">What Users Say</h2>
-                    <p class="text-lg text-gray-600 dark:text-gray-400">Real experiences from people who've improved their focus.</p>
-                </div>
-                
-                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-                    <!-- Testimonial 1 -->
-                    <div class="card rounded-lg shadow-md p-6">
-                        <div class="flex items-center mb-4">
-                            <div class="w-12 h-12 rounded-full overflow-hidden mr-4">
-                                <img src="https://i.pravatar.cc/150?img=1" alt="User Avatar" class="w-full h-full object-cover">
-                            </div>
-                            <div>
-                                <h4 class="font-semibold">Alex Morgan</h4>
-                                <p class="text-sm text-gray-500 dark:text-gray-400">Software Engineer</p>
-                            </div>
-                        </div>
-                        <p class="text-gray-600 dark:text-gray-400 mb-3">
-                            "ZenScreen has helped me stay focused during long coding sessions. The black screen mode eliminates distractions and the timer keeps me on track."
-                        </p>
-                        <div class="flex text-yellow-400">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                        </div>
-                    </div>
-                    
-                    <!-- Testimonial 2 -->
-                    <div class="card rounded-lg shadow-md p-6">
-                        <div class="flex items-center mb-4">
-                            <div class="w-12 h-12 rounded-full overflow-hidden mr-4">
-                                <img src="https://i.pravatar.cc/150?img=5" alt="User Avatar" class="w-full h-full object-cover">
-                            </div>
-                            <div>
-                                <h4 class="font-semibold">Jamie Chen</h4>
-                                <p class="text-sm text-gray-500 dark:text-gray-400">Graduate Student</p>
-                            </div>
-                        </div>
-                        <p class="text-gray-600 dark:text-gray-400 mb-3">
-                            "As a student, I need to focus for long periods. The customizable opacity helps reduce eye strain during late-night study sessions."
-                        </p>
-                        <div class="flex text-yellow-400">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star-half-alt"></i>
-                        </div>
-                    </div>
-                    
-                    <!-- Testimonial 3 -->
-                    <div class="card rounded-lg shadow-md p-6">
-                        <div class="flex items-center mb-4">
-                            <div class="w-12 h-12 rounded-full overflow-hidden mr-4">
-                                <img src="https://i.pravatar.cc/150?img=8" alt="User Avatar" class="w-full h-full object-cover">
-                            </div>
-                            <div>
-                                <h4 class="font-semibold">Sam Taylor</h4>
-                                <p class="text-sm text-gray-500 dark:text-gray-400">Digital Artist</p>
-                            </div>
-                        </div>
-                        <p class="text-gray-600 dark:text-gray-400 mb-3">
-                            "I use ZenScreen to take intentional breaks between art sessions. The energy savings on my OLED display are a great bonus!"
-                        </p>
-                        <div class="flex text-yellow-400">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        
-        <!-- FAQ Section -->
-        <section class="py-16 bg-gray-50 dark:bg-gray-900">
-            <div class="container mx-auto px-4">
-                <div class="max-w-4xl mx-auto text-center mb-12">
-                    <h2 class="text-3xl font-bold mb-4">Frequently Asked Questions</h2>
-                    <p class="text-lg text-gray-600 dark:text-gray-400">Get quick answers to common questions about ZenScreen.</p>
-                </div>
-                
-                <div class="max-w-3xl mx-auto space-y-4">
-                    <!-- FAQ Item 1 -->
-                    <div class="card rounded-lg shadow-md overflow-hidden">
-                        <button class="faq-toggle w-full text-left p-5 flex justify-between items-center font-medium">
-                            <span>How does ZenScreen improve focus?</span>
-                            <i class="fas fa-chevron-down transition-transform"></i>
-                        </button>
-                        <div class="faq-content hidden p-5 pt-0 text-gray-600 dark:text-gray-400 border-t border-gray-200 dark:border-gray-700">
-                            <p>ZenScreen improves focus by creating a distraction-free environment with its black screen overlay. By blocking visual distractions on your screen, it helps you concentrate on your thoughts, audio content, or simply take a mental break. The adjustable opacity levels allow you to customize the experience to your preference.</p>
-                        </div>
-                    </div>
-                    
-                    <!-- FAQ Item 2 -->
-                    <div class="card rounded-lg shadow-md overflow-hidden">
-                        <button class="faq-toggle w-full text-left p-5 flex justify-between items-center font-medium">
-                            <span>Does it really save battery life?</span>
-                            <i class="fas fa-chevron-down transition-transform"></i>
-                        </button>
-                        <div class="faq-content hidden p-5 pt-0 text-gray-600 dark:text-gray-400 border-t border-gray-200 dark:border-gray-700">
-                            <p>Yes, particularly on devices with OLED screens. OLED displays use individual pixels that can be turned off completely when displaying black, consuming significantly less power. The darker your screen, the more energy you save. On LCD screens, the energy savings are less substantial but still present when combined with reduced brightness.</p>
-                        </div>
-                    </div>
-                    
-                    <!-- FAQ Item 3 -->
-                    <div class="card rounded-lg shadow-md overflow-hidden">
-                        <button class="faq-toggle w-full text-left p-5 flex justify-between items-center font-medium">
-                            <span>How does the timer function work?</span>
-                            <i class="fas fa-chevron-down transition-transform"></i>
-                        </button>
-                        <div class="faq-content hidden p-5 pt-0 text-gray-600 dark:text-gray-400 border-t border-gray-200 dark:border-gray-700">
-                            <p>The timer function allows you to set predefined focus periods. Select a duration (5, 10, 15, 25, 30 minutes, or 1 hour), and the black screen will automatically activate for that period. When the timer ends, the black screen will deactivate, signaling the end of your focus session. It's perfect for structured work sessions like the Pomodoro Technique.</p>
-                        </div>
-                    </div>
-                    
-                    <!-- FAQ Item 4 -->
-                    <div class="card rounded-lg shadow-md overflow-hidden">
-                        <button class="faq-toggle w-full text-left p-5 flex justify-between items-center font-medium">
-                            <span>Will ZenScreen work on all browsers?</span>
-                            <i class="fas fa-chevron-down transition-transform"></i>
-                        </button>
-                        <div class="faq-content hidden p-5 pt-0 text-gray-600 dark:text-gray-400 border-t border-gray-200 dark:border-gray-700">
-                            <p>ZenScreen is compatible with all modern browsers including Chrome, Firefox, Safari, and Edge. It's designed to be lightweight and use standard web technologies that are widely supported. The keyboard shortcuts may vary slightly between operating systems, but the core functionality works consistently across platforms.</p>
-                        </div>
-                    </div>
-                    
-                    <!-- FAQ Item 5 -->
-                    <div class="card rounded-lg shadow-md overflow-hidden">
-                        <button class="faq-toggle w-full text-left p-5 flex justify-between items-center font-medium">
-                            <span>Is ZenScreen free to use?</span>
-                            <i class="fas fa-chevron-down transition-transform"></i>
-                        </button>
-                        <div class="faq-content hidden p-5 pt-0 text-gray-600 dark:text-gray-400 border-t border-gray-200 dark:border-gray-700">
-                            <p>Yes, ZenScreen is completely free to use. We believe in providing accessible tools to help people improve their focus and productivity. There are no hidden fees, subscriptions, or premium features. All functionality is available to all users without limitations.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        
-        <!-- Stats Section -->
-        <section class="py-16 bg-gradient-to-r from-primary-color to-indigo-600 text-white">
-            <div class="container mx-auto px-4">
-                <div class="max-w-6xl mx-auto">
-                    <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-                        <!-- Stat 1 -->
-                        <div>
-                            <div class="text-4xl font-bold mb-2">50,000+</div>
-                            <p class="text-indigo-100">Active Users</p>
-                        </div>
-                        
-                        <!-- Stat 2 -->
-                        <div>
-                            <div class="text-4xl font-bold mb-2">2M+</div>
-                            <p class="text-indigo-100">Focus Sessions</p>
-                        </div>
-                        
-                        <!-- Stat 3 -->
-                        <div>
-                            <div class="text-4xl font-bold mb-2">30%</div>
-                            <p class="text-indigo-100">Average Energy Savings</p>
-                        </div>
-                        
-                        <!-- Stat 4 -->
-                        <div>
-                            <div class="text-4xl font-bold mb-2">4.8/5</div>
-                            <p class="text-indigo-100">User Rating</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        
-        <!-- About Section -->
-        <section class="py-16" id="about">
-            <div class="container mx-auto px-4">
-                <div class="max-w-3xl mx-auto">
-                    <h2 class="text-3xl font-bold mb-6 text-center">Our Story</h2>
-                    
-                    <div class="card rounded-lg shadow-md p-8">
-                        <p class="mb-4 text-gray-600 dark:text-gray-400">
-                            ZenScreen was born from a simple need: to find a moment of digital calm in our increasingly screen-dominated lives.
-                        </p>
-                        
-                        <p class="mb-4 text-gray-600 dark:text-gray-400">
-                            We noticed how many people were struggling with digital distractions, eye strain, and the energy drain of constant screen use. After seeing the positive feedback from users of similar tools like blackscreen.app, we set out to create a more comprehensive solution.
-                        </p>
-                        
-                        <p class="mb-4 text-gray-600 dark:text-gray-400">
-                            Our mission is simple: help people reclaim their focus in a digital world. Whether you're taking a brief mental break, reducing eye strain during late-night work, or trying to save battery life on your device, ZenScreen is designed to be your simple but powerful ally.
-                        </p>
-                        
-                        <p class="text-gray-600 dark:text-gray-400">
-                            Today, ZenScreen is used by students, professionals, and anyone seeking a moment of focus in their digital day. We remain committed to maintaining a free, accessible tool that makes digital wellness available to everyone.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </section>
-        
-        <!-- Call to Action Section -->
-        <section class="py-16 bg-gray-50 dark:bg-gray-900" id="cta">
-            <div class="container mx-auto px-4">
-                <div class="max-w-4xl mx-auto text-center">
-                    <h2 class="text-3xl font-bold mb-6">Ready to Enhance Your Focus?</h2>
-                    <p class="text-xl mb-8 text-gray-600 dark:text-gray-400">
-                        Try ZenScreen now and experience the difference a distraction-free screen can make.
-                    </p>
-                    
-                    <div class="flex flex-col sm:flex-row justify-center gap-4">
-                        <button id="ctaToggleButton" class="primary-btn rounded-full py-3 px-8 font-medium flex items-center justify-center">
-                            <i class="fas fa-eye-slash mr-2"></i>
-                            Activate ZenScreen
-                        </button>
-                        <a href="#features" class="border border-gray-300 dark:border-gray-600 rounded-full py-3 px-8 font-medium flex items-center justify-center hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
-                            <i class="fas fa-info-circle mr-2"></i>
-                            Learn More
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
+    </section>
     
-    <!-- Footer -->
-    <footer class="py-4 border-t border-gray-200 dark:border-gray-700">
-        <div class="container mx-auto px-4">
-            <div class="flex flex-col md:flex-row justify-between items-center">
-                <p class="text-sm text-gray-600 dark:text-gray-400 mb-2 md:mb-0">
-                    © 2023 ZenScreen - Focus Enhancement Tool
-                </p>
-                <div class="flex items-center space-x-4">
-                    <a href="#" class="text-sm text-gray-600 dark:text-gray-400 hover:text-primary-color dark:hover:text-primary-color">Privacy Policy</a>
-                    <a href="#" class="text-sm text-gray-600 dark:text-gray-400 hover:text-primary-color dark:hover:text-primary-color">Terms of Use</a>
-                    <a href="#" class="text-sm text-gray-600 dark:text-gray-400 hover:text-primary-color dark:hover:text-primary-color">Contact</a>
+    <!-- Pricing Section -->
+    <section class="pricing-section" id="pricing">
+        <div class="container">
+            <h2 class="section-title">选择适合你的专注计划</h2>
+            <p class="section-subtitle">灵活的价格方案，满足不同需求</p>
+            
+            <div class="pricing-cards">
+                <div class="pricing-card basic">
+                    <div class="pricing-header">
+                        <h3 class="plan-name">基础版</h3>
+                        <div class="plan-price">
+                            <span class="currency">¥</span>
+                            <span class="amount">0</span>
+                            <span class="period">/永久</span>
+                        </div>
+                    </div>
+                    
+                    <div class="pricing-features">
+                        <ul>
+                            <li><i class="fas fa-check"></i> 基础黑屏模式</li>
+                            <li><i class="fas fa-check"></i> 简单定时器功能</li>
+                            <li><i class="fas fa-check"></i> 基础专注统计</li>
+                            <li><i class="fas fa-times"></i> 高级屏幕模式</li>
+                            <li><i class="fas fa-times"></i> 社交分享功能</li>
+                            <li><i class="fas fa-times"></i> 数据分析与可视化</li>
+                            <li><i class="fas fa-times"></i> 专注小组功能</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="pricing-footer">
+                        <a href="#download" class="pricing-button">免费开始</a>
+                    </div>
+                </div>
+                
+                <div class="pricing-card popular">
+                    <div class="popular-badge">最受欢迎</div>
+                    <div class="pricing-header">
+                        <h3 class="plan-name">专业版</h3>
+                        <div class="plan-price">
+                            <span class="original-price">¥99</span>
+                            <span class="currency">¥</span>
+                            <span class="amount">49</span>
+                            <span class="period">/年</span>
+                        </div>
+                        <div class="discount-tag">限时5折优惠</div>
+                    </div>
+                    
+                    <div class="pricing-features">
+                        <ul>
+                            <li><i class="fas fa-check"></i> 所有基础版功能</li>
+                            <li><i class="fas fa-check"></i> 全部高级屏幕模式</li>
+                            <li><i class="fas fa-check"></i> 番茄工作法计时器</li>
+                            <li><i class="fas fa-check"></i> 社交分享功能</li>
+                            <li><i class="fas fa-check"></i> 基础数据分析</li>
+                            <li><i class="fas fa-check"></i> 专注小组（最多5人）</li>
+                            <li><i class="fas fa-times"></i> 高级数据可视化</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="pricing-footer">
+                        <a href="#download" class="pricing-button">立即购买</a>
+                        <div class="countdown-container">
+                            <p>优惠倒计时：</p>
+                            <div class="countdown-timer" id="pricingCountdown">23:59:59</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="pricing-card premium">
+                    <div class="pricing-header">
+                        <h3 class="plan-name">尊享版</h3>
+                        <div class="plan-price">
+                            <span class="currency">¥</span>
+                            <span class="amount">99</span>
+                            <span class="period">/年</span>
+                        </div>
+                    </div>
+                    
+                    <div class="pricing-features">
+                        <ul>
+                            <li><i class="fas fa-check"></i> 所有专业版功能</li>
+                            <li><i class="fas fa-check"></i> 自定义屏幕模式</li>
+                            <li><i class="fas fa-check"></i> 高级数据分析与可视化</li>
+                            <li><i class="fas fa-check"></i> 无限专注小组成员</li>
+                            <li><i class="fas fa-check"></i> 专属成就系统</li>
+                            <li><i class="fas fa-check"></i> 优先客户支持</li>
+                            <li><i class="fas fa-check"></i> 跨设备同步</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="pricing-footer">
+                        <a href="#download" class="pricing-button">立即购买</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="pricing-guarantee">
+                <i class="fas fa-shield-alt"></i>
+                <p>30天无条件退款保证，无风险尝试</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Download Section -->
+    <section class="download-section" id="download">
+        <div class="container">
+            <div class="download-content">
+                <h2 class="section-title">立即开始你的专注之旅</h2>
+                <p class="section-subtitle">下载 ShareBlackScreen，解锁专注力的游戏</p>
+                
+                <div class="download-platforms">
+                    <a href="#" class="platform-button">
+                        <i class="fab fa-windows"></i>
+                        <span>Windows</span>
+                    </a>
+                    <a href="#" class="platform-button">
+                        <i class="fab fa-apple"></i>
+                        <span>macOS</span>
+                    </a>
+                    <a href="#" class="platform-button">
+                        <i class="fab fa-chrome"></i>
+                        <span>Chrome 插件</span>
+                    </a>
+                    <a href="#" class="platform-button">
+                        <i class="fab fa-android"></i>
+                        <span>Android</span>
+                    </a>
+                    <a href="#" class="platform-button">
+                        <i class="fab fa-app-store-ios"></i>
+                        <span>iOS</span>
+                    </a>
+                </div>
+                
+                <div class="download-form">
+                    <h3>获取专属优惠和最新功能更新</h3>
+                    <form id="subscribeForm">
+                        <div class="form-group">
+                            <input type="email" id="email" placeholder="输入您的邮箱地址" required>
+                            <button type="submit" class="subscribe-button">订阅</button>
+                        </div>
+                        <div class="form-privacy">
+                            <input type="checkbox" id="privacy" required>
+                            <label for="privacy">我同意接收 ShareBlackScreen 的产品更新和优惠信息</label>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- FAQ Section -->
+    <section class="faq-section" id="faq">
+        <div class="container">
+            <h2 class="section-title">常见问题</h2>
+            <p class="section-subtitle">关于 ShareBlackScreen 的一切</p>
+            
+            <div class="faq-container">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>ShareBlackScreen 适用于哪些操作系统？</h3>
+                        <span class="faq-toggle"><i class="fas fa-chevron-down"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>ShareBlackScreen 目前支持 Windows、macOS、Android、iOS 平台，同时提供 Chrome 浏览器插件版本，几乎覆盖所有主流设备。所有平台版本均支持数据同步，让您在不同设备间无缝切换。</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>免费版和付费版有什么区别？</h3>
+                        <span class="faq-toggle"><i class="fas fa-chevron-down"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>免费版提供基础黑屏模式、简单定时器和基础专注统计功能。付费版（专业版和尊享版）提供更多高级功能，如多样化屏幕模式、番茄工作法、社交分享、数据分析等。详细对比请查看<a href="#pricing">价格方案</a>。</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>如何使用社交分享功能？</h3>
+                        <span class="faq-toggle"><i class="fas fa-chevron-down"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>在应用内完成专注任务后，点击"分享"按钮，选择要分享的社交平台（如微信、微博、QQ等），即可将您的专注成果分享给朋友。您也可以创建或加入专注小组，与朋友一起保持专注。</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>购买后可以退款吗？</h3>
+                        <span class="faq-toggle"><i class="fas fa-chevron-down"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>是的，我们提供30天无条件退款保证。如果您对产品不满意，可以在购买后30天内联系我们的客服申请全额退款，无需说明理由。</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>ShareBlackScreen 会收集我的个人数据吗？</h3>
+                        <span class="faq-toggle"><i class="fas fa-chevron-down"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>我们非常重视用户隐私。ShareBlackScreen 只会收集必要的使用数据（如专注时长、使用频率等）用于提供服务和改进产品。我们不会收集您的个人敏感信息，也不会将数据分享给第三方。详情请查看我们的<a href="#">隐私政策</a>。</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>如何联系客服获取帮助？</h3>
+                        <span class="faq-toggle"><i class="fas fa-chevron-down"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>您可以通过以下方式联系我们的客服团队：</p>
+                        <ul>
+                            <li>邮箱：support@shareblackscreen.com</li>
+                            <li>在线客服：应用内点击"帮助"→"联系客服"</li>
+                            <li>社交媒体：关注我们的<a href="#">微信公众号</a>或<a href="#">微博</a></li>
+                        </ul>
+                        <p>我们的客服团队会在24小时内回复您的问题。</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>如何使用番茄工作法功能？</h3>
+                        <span class="faq-toggle"><i class="fas fa-chevron-down"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>在应用主界面选择"番茄工作法"模式，默认设置为25分钟工作，5分钟休息。您可以根据个人习惯调整时间长度。点击"开始"按钮后，程序会自动进入专注状态，并在时间结束时提醒您休息。完成一定次数的番茄钟后，会获得额外的成就奖励。</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>专注数据会自动同步吗？</h3>
+                        <span class="faq-toggle"><i class="fas fa-chevron-down"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>是的，只要您使用同一账号登录，您的专注数据会自动在所有设备间同步。专业版和尊享版用户可以查看更详细的历史数据和分析报告，帮助您了解自己的专注习惯和提升空间。</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>如何创建自定义专注方案？</h3>
+                        <span class="faq-toggle"><i class="fas fa-chevron-down"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>在应用的"设置"→"时间方案"中，点击"创建新方案"，您可以自定义专注时长、休息时间、循环次数以及屏幕模式。创建后的方案会保存在您的账户中，随时可以一键启动。尊享版用户还可以设置不同时段自动启动不同的专注方案。</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>应用会占用大量系统资源吗？</h3>
+                        <span class="faq-toggle"><i class="fas fa-chevron-down"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>不会。ShareBlackScreen 经过优化，占用极少的系统资源。即使在后台运行，也不会明显影响设备性能。我们的移动版应用也经过特别优化，可以在不影响电池寿命的情况下长时间运行。</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="faq-more">
+                <a href="#" class="more-questions-button">
+                    <span>查看更多问题</span>
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer Section -->
+    <footer class="footer-section">
+        <div class="container">
+            <div class="footer-top">
+                <div class="footer-logo">
+                    <img src="img/logo-white.webp" alt="ShareBlackScreen Logo" width="180" height="40">
+                    <p class="footer-slogan">解锁专注力的游戏</p>
+                </div>
+                
+                <div class="footer-nav">
+                    <div class="footer-nav-column">
+                        <h4>产品</h4>
+                        <ul>
+                            <li><a href="#features">功能</a></li>
+                            <li><a href="#pricing">价格</a></li>
+                            <li><a href="#download">下载</a></li>
+                            <li><a href="#faq">常见问题</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-nav-column">
+                        <h4>资源</h4>
+                        <ul>
+                            <li><a href="#">博客</a></li>
+                            <li><a href="#">使用教程</a></li>
+                            <li><a href="#">专注技巧</a></li>
+                            <li><a href="#">API文档</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-nav-column">
+                        <h4>公司</h4>
+                        <ul>
+                            <li><a href="#">关于我们</a></li>
+                            <li><a href="#">联系我们</a></li>
+                            <li><a href="#">加入我们</a></li>
+                            <li><a href="#">媒体报道</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-nav-column">
+                        <h4>法律</h4>
+                        <ul>
+                            <li><a href="#">服务条款</a></li>
+                            <li><a href="#">隐私政策</a></li>
+                            <li><a href="#">Cookie政策</a></li>
+                            <li><a href="#">GDPR合规</a></li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="footer-social">
+                    <h4>关注我们</h4>
+                    <div class="social-icons">
+                        <a href="#" class="social-icon"><i class="fab fa-weixin"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-weibo"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-qq"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-github"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-bilibili"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="copyright">
+                    <p>&copy; 2023 ShareBlackScreen. 保留所有权利。</p>
+                </div>
+                
+                <div class="app-badges">
+                    <a href="#" class="app-badge">
+                        <img src="img/app-store-badge.webp" alt="App Store" width="120" height="40">
+                    </a>
+                    <a href="#" class="app-badge">
+                        <img src="img/google-play-badge.webp" alt="Google Play" width="120" height="40">
+                    </a>
+                </div>
+                
+                <!-- 在footer部分的语言选择器 -->
+                <div class="language-selector">
+                    <select id="languageSelect">
+                        <option value="zh-CN" selected>简体中文</option>
+                        <option value="en">English</option>
+                        <option value="ja">日本語</option>
+                        <option value="ko">한국어</option>
+                    </select>
                 </div>
             </div>
         </div>
     </footer>
     
-    <script>
-        // Dark mode detection and toggle
-        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-            document.documentElement.classList.add('dark');
-        }
-        
-        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
-            if (event.matches) {
-                document.documentElement.classList.add('dark');
-            } else {
-                document.documentElement.classList.remove('dark');
-            }
-        });
-        
-        document.getElementById('darkModeToggle').addEventListener('click', () => {
-            document.documentElement.classList.toggle('dark');
-        });
-        
-        // Black screen functionality
-        const blackScreen = document.getElementById('blackScreen');
-        const toggleButton = document.getElementById('toggleButton');
-        const heroToggleButton = document.getElementById('heroToggleButton');
-        const ctaToggleButton = document.getElementById('ctaToggleButton');
-        const toggleIcon = document.getElementById('toggleIcon');
-        const toggleText = document.getElementById('toggleText');
-        const opacitySlider = document.getElementById('opacitySlider');
-        const timerButtons = document.querySelectorAll('.timer-btn');
-        const timerDisplay = document.getElementById('timerDisplay');
-        const startTimer = document.getElementById('startTimer');
-        const resetTimer = document.getElementById('resetTimer');
-        const faqToggles = document.querySelectorAll('.faq-toggle');
-        
-        let isBlackScreenActive = false;
-        let timerInterval;
-        let timerSeconds = 0;
-        let selectedTime = 0;
-        
-        // Toggle black screen
-        function toggleBlackScreen() {
-            isBlackScreenActive = !isBlackScreenActive;
-            
-            if (isBlackScreenActive) {
-                blackScreen.style.display = 'block';
-                blackScreen.style.opacity = opacitySlider.value / 100;
-                toggleText.textContent = 'Deactivate Black Screen';
-                toggleIcon.classList.remove('fa-eye-slash');
-                toggleIcon.classList.add('fa-eye');
-                
-                // Scroll to control panel if activated from hero or CTA
-                const controlPanel = document.getElementById('controlPanel');
-                if (!isElementInViewport(controlPanel)) {
-                    controlPanel.scrollIntoView({ behavior: 'smooth' });
-                }
-            } else {
-                blackScreen.style.opacity = 0;
-                setTimeout(() => {
-                    blackScreen.style.display = 'none';
-                }, 500);
-                toggleText.textContent = 'Activate Black Screen';
-                toggleIcon.classList.remove('fa-eye');
-                toggleIcon.classList.add('fa-eye-slash');
-            }
-        }
-        
-        // Check if element is in viewport
-        function isElementInViewport(el) {
-            const rect = el.getBoundingClientRect();
-            return (
-                rect.top >= 0 &&
-                rect.left >= 0 &&
-                rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-                rect.right <= (window.innerWidth || document.documentElement.clientWidth)
-            );
-        }
-        
-        // Add event listeners to all toggle buttons
-        toggleButton.addEventListener('click', toggleBlackScreen);
-        if (heroToggleButton) heroToggleButton.addEventListener('click', toggleBlackScreen);
-        if (ctaToggleButton) ctaToggleButton.addEventListener('click', toggleBlackScreen);
-        
-        // Adjust opacity
-        opacitySlider.addEventListener('input', () => {
-            if (isBlackScreenActive) {
-                blackScreen.style.opacity = opacitySlider.value / 100;
-            }
-        });
-        
-        // Format time as MM:SS
-        function formatTime(seconds) {
-            const mins = Math.floor(seconds / 60).toString().padStart(2, '0');
-            const secs = (seconds % 60).toString().padStart(2, '0');
-            return `${mins}:${secs}`;
-        }
-        
-        // Timer functionality
-        timerButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                // Remove active class from all buttons
-                timerButtons.forEach(btn => btn.classList.remove('active'));
-                
-                // Add active class to clicked button
-                button.classList.add('active');
-                
-                // Set timer minutes
-                selectedTime = parseInt(button.dataset.time);
-                timerSeconds = selectedTime * 60;
-                timerDisplay.textContent = formatTime(timerSeconds);
-            });
-        });
-        
-        startTimer.addEventListener('click', () => {
-            if (selectedTime === 0) return;
-            
-            // Clear any existing interval
-            clearInterval(timerInterval);
-            
-            // If black screen is not active, activate it
-            if (!isBlackScreenActive) {
-                toggleBlackScreen();
-            }
-            
-            // Set initial display
-            timerDisplay.textContent = formatTime(timerSeconds);
-            
-            // Start the countdown
-            timerInterval = setInterval(() => {
-                timerSeconds--;
-                
-                if (timerSeconds <= 0) {
-                    clearInterval(timerInterval);
-                    timerSeconds = 0;
-                    
-                    // Deactivate black screen when timer ends
-                    if (isBlackScreenActive) {
-                        toggleBlackScreen();
-                    }
-                    
-                    // Reset the selected timer button
-                    timerButtons.forEach(btn => btn.classList.remove('active'));
-                }
-                
-                timerDisplay.textContent = formatTime(timerSeconds);
-            }, 1000);
-            
-            // Change button text
-            startTimer.textContent = "Running";
-        });
-        
-        resetTimer.addEventListener('click', () => {
-            clearInterval(timerInterval);
-            timerSeconds = selectedTime * 60;
-            timerDisplay.textContent = formatTime(timerSeconds);
-            startTimer.textContent = "Start";
-            
-            // Reset the selected timer button
-            timerButtons.forEach(btn => btn.classList.remove('active'));
-            selectedTime = 0;
-        });
-        
-        // FAQ Toggles
-        faqToggles.forEach(toggle => {
-            toggle.addEventListener('click', () => {
-                // Toggle the active state of the clicked FAQ item
-                const content = toggle.nextElementSibling;
-                const icon = toggle.querySelector('i');
-                
-                // Toggle visibility
-                content.classList.toggle('hidden');
-                
-                // Toggle icon rotation
-                if (content.classList.contains('hidden')) {
-                    icon.style.transform = 'rotate(0deg)';
-                } else {
-                    icon.style.transform = 'rotate(180deg)';
-                }
-                
-                // Close other FAQs
-                faqToggles.forEach(otherToggle => {
-                    if (otherToggle !== toggle) {
-                        const otherContent = otherToggle.nextElementSibling;
-                        const otherIcon = otherToggle.querySelector('i');
-                        
-                        otherContent.classList.add('hidden');
-                        otherIcon.style.transform = 'rotate(0deg)';
-                    }
-                });
-            });
-        });
-        
-        // Smooth scroll for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                
-                const targetId = this.getAttribute('href');
-                if (targetId === '#') return;
-                
-                const targetElement = document.querySelector(targetId);
-                if (targetElement) {
-                    targetElement.scrollIntoView({
-                        behavior: 'smooth'
-                    });
-                }
-            });
-        });
-        
-        // Video player mock function
-        const videoContainer = document.querySelector('.aspect-w-16');
-        if (videoContainer) {
-            videoContainer.addEventListener('click', () => {
-                // This would typically open a modal with the actual video
-                // For this demo, we'll just alert the user
-                alert('Video player would open here in a real implementation');
-            });
-        }
-        
-        // Keyboard shortcuts
-        document.addEventListener('keydown', (e) => {
-            // Toggle black screen with spacebar
-            if (e.code === 'Space' && document.activeElement.tagName !== 'INPUT' && document.activeElement.tagName !== 'TEXTAREA' && document.activeElement.tagName !== 'BUTTON') {
-                e.preventDefault();
-                toggleBlackScreen();
-            }
-            
-            // Deactivate black screen with Escape
-            if (e.code === 'Escape' && isBlackScreenActive) {
-                toggleBlackScreen();
-            }
-            
-            // Increase opacity with + key
-            if ((e.key === '+' || e.key === '=') && isBlackScreenActive) {
-                opacitySlider.value = Math.min(100, parseInt(opacitySlider.value) + 5);
-                blackScreen.style.opacity = opacitySlider.value / 100;
-            }
-            
-            // Decrease opacity with - key
-            if (e.key === '-' && isBlackScreenActive) {
-                opacitySlider.value = Math.max(30, parseInt(opacitySlider.value) - 5);
-                blackScreen.style.opacity = opacitySlider.value / 100;
-            }
-        });
-        
-        // Fix for FontAwesome "fa-focus" icon which isn't in the free version
-        document.addEventListener('DOMContentLoaded', () => {
-            const focusIcon = document.querySelector('.fa-focus');
-            if (focusIcon) {
-                focusIcon.classList.remove('fa-focus');
-                focusIcon.classList.add('fa-bullseye');
-            }
-        });
-    </script>
-
-
-</body></html>
+    <!-- Back to Top Button -->
+    <a href="#" class="back-to-top" id="backToTop">
+        <i class="fas fa-chevron-up"></i>
+    </a>
+    
+    <!-- Cookie Consent -->
+    <div class="cookie-consent" id="cookieConsent">
+        <div class="cookie-content">
+            <p>我们使用 Cookie 来提升您的浏览体验、分析网站流量并提供个性化内容。继续使用本网站即表示您同意我们的<a href="#">Cookie 政策</a>。</p>
+            <div class="cookie-buttons">
+                <button class="cookie-accept" id="acceptCookies">接受</button>
+                <button class="cookie-settings" id="cookieSettings">设置</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- JavaScript Files -->
+    <!-- JavaScript Files -->
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/countdown.js"></script>
+    <script src="js/tabs.js"></script>
+    <script src="js/slider.js"></script>
+    <script src="js/faq.js"></script>
+    <script src="js/video.js"></script>
+    <script src="js/counter.js"></script>
+    <script src="js/mobile-nav.js"></script>
+    <script src="js/playground.js"></script>
+    <script src="js/social-focus.js"></script>
+    <script src="js/time-plan.js"></script>
+    <script src="js/i18n.js"></script>
+<!-- 在i18n.js之前添加 -->
+    <script src="js/auto-language.js"></script>    
+</body>
+</html>
