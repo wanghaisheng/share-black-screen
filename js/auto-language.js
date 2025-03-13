@@ -44,15 +44,38 @@
     if (targetLang && supportedLanguages.includes(targetLang)) {
         // 等待DOM加载完成
         document.addEventListener('DOMContentLoaded', function() {
-            // 等待i18n模块加载完成
-            setTimeout(function() {
-                if (window.i18n && typeof window.i18n.changeLanguage === 'function') {
-                    console.log('自动切换语言到:', targetLang);
-                    window.i18n.changeLanguage(targetLang);
-                } else {
-                    console.error('i18n模块未加载或changeLanguage方法不存在');
-                }
-            }, 500);
+            // 检查window.i18n是否已加载
+            if (window.i18n && typeof window.i18n.changeLanguage === 'function') {
+                console.log('自动切换语言到:', targetLang);
+                window.i18n.changeLanguage(targetLang);
+            } else {
+                // 如果i18n模块尚未加载，使用MutationObserver监听i18n加载
+                const observer = new MutationObserver(function(mutations) {
+                    if (window.i18n && typeof window.i18n.changeLanguage === 'function') {
+                        console.log('i18n模块已加载，自动切换语言到:', targetLang);
+                        window.i18n.changeLanguage(targetLang);
+                        observer.disconnect(); // 停止观察
+                    }
+                });
+                
+                // 开始观察document.body的变化
+                observer.observe(document.body, { childList: true, subtree: true });
+                
+                // 设置超时，防止无限等待
+                setTimeout(function() {
+                    observer.disconnect();
+                    // 最后尝试一次
+                    if (window.i18n && typeof window.i18n.changeLanguage === 'function') {
+                        console.log('超时后尝试切换语言到:', targetLang);
+                        window.i18n.changeLanguage(targetLang);
+                    } else if (typeof changeLanguage === 'function') {
+                        console.log('超时后尝试使用全局changeLanguage函数切换语言到:', targetLang);
+                        changeLanguage(targetLang);
+                    } else {
+                        console.error('无法找到changeLanguage函数');
+                    }
+                }, 2000);
+            }
         });
     }
 })();

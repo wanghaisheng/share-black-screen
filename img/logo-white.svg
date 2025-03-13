@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="180" height="40" viewBox="0 0 180 40">
+  <style>
+    .logo-text { font-family: 'Arial', sans-serif; font-weight: bold; }
+    .primary { fill: #4a6cf7; }
+    .text-white { fill: #ffffff; }
+  </style>
+  <rect x="0" y="8" width="24" height="24" rx="4" class="primary"/>
+  <rect x="8" y="16" width="8" height="8" fill="white"/>
+  <text x="32" y="26" class="logo-text text-white" font-size="18">ShareBlackScreen</text>
+</svg>

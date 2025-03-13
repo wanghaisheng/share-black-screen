@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ShareBlackScreen - 解锁专注力的游戏 | 多功能屏幕管理工具</title>
-    <meta name="description" content="ShareBlackScreen是一款专注于提升工作效率的多功能屏幕管理工具，通过游戏化体验帮助你减少干扰、保护视力、提高专注力。立即开始你的专注之旅！">
+    <title data-i18n="page_title">ShareBlackScreen - 解锁专注力的游戏 | 多功能屏幕管理工具</title>
+    <meta name="description" content="ShareBlackScreen是一款专注于提升工作效率的多功能屏幕管理工具，通过游戏化体验帮助你减少干扰、保护视力、提高专注力。立即开始你的专注之旅！" data-i18n="meta_description">
     <meta name="keywords" content="专注力工具,黑屏应用,屏幕管理,番茄工作法,专注力游戏,视力保护,工作效率提升">
     
     <!-- Favicon -->
@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="css/social-focus.css">
     <link rel="stylesheet" href="css/time-plan.css">
     <link rel="stylesheet" href="css/i18n.css">
+    <link rel="stylesheet" href="css/unsplash-avatars.css">
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -33,24 +34,24 @@
 <!-- Playground Section -->
 <section class="playground-section" id="playground">
     <div class="container">
-        <h2 class="section-title">在线体验 ShareBlackScreen</h2>
-        <p class="section-subtitle">无需下载，立即体验我们的核心功能</p>
+        <h2 class="section-title" data-i18n="online_experience">在线体验 ShareBlackScreen</h2>
+        <p class="section-subtitle" data-i18n="no_download_experience">无需下载，立即体验我们的核心功能</p>
         
         <div class="playground-container">
             <div class="playground-controls">
                 <div class="control-group">
-                    <h3>屏幕模式</h3>
+                    <h3 data-i18n="screen_mode">屏幕模式</h3>
                     <div class="mode-buttons">
-                        <button class="mode-button active" data-mode="black">黑屏</button>
-                        <button class="mode-button" data-mode="white">白屏</button>
-                        <button class="mode-button" data-mode="blue">蓝屏</button>
-                        <button class="mode-button" data-mode="green">绿屏</button>
-                        <button class="mode-button" data-mode="gradient">渐变</button>
+                        <button class="mode-button active" data-mode="black" data-i18n="black_screen">黑屏</button>
+                        <button class="mode-button" data-mode="white" data-i18n="white_screen">白屏</button>
+                        <button class="mode-button" data-mode="blue" data-i18n="blue_screen">蓝屏</button>
+                        <button class="mode-button" data-mode="green" data-i18n="green_screen">绿屏</button>
+                        <button class="mode-button" data-mode="gradient" data-i18n="gradient_screen">渐变</button>
                     </div>
                 </div>
                 
                 <div class="control-group">
-                    <h3>透明度调节</h3>
+                    <h3 data-i18n="opacity_adjustment">透明度调节</h3>
                     <div class="opacity-control">
                         <input type="range" id="opacitySlider" min="0" max="100" value="100">
                         <span id="opacityValue">100%</span>
@@ -58,43 +59,43 @@
                 </div>
                 
                 <div class="control-group">
-                    <h3>时间管理</h3>
+                    <h3 data-i18n="time_management">时间管理</h3>
                     <div class="countdown-display-control">
                         <label class="switch">
                             <input type="checkbox" id="showCountdownToggle" checked>
                             <span class="slider round"></span>
                         </label>
-                        <span>显示倒计时</span>
+                        <span data-i18n="show_countdown">显示倒计时</span>
                     </div>
 
 
 
                     <div class="timer-controls">
                         <div class="timer-presets">
-                            <button class="timer-preset" data-time="5">5分钟</button>
-                            <button class="timer-preset" data-time="25">25分钟</button>
-                            <button class="timer-preset" data-time="50">50分钟</button>
-                            <button id="endTimeBtn" class="timer-preset special">结束时间</button>
+                            <button class="timer-preset" data-time="5" data-i18n="five_minutes">5分钟</button>
+                            <button class="timer-preset" data-time="25" data-i18n="twentyfive_minutes">25分钟</button>
+                            <button class="timer-preset" data-time="50" data-i18n="fifty_minutes">50分钟</button>
+                            <button id="endTimeBtn" class="timer-preset special" data-i18n="end_time">结束时间</button>
                         </div>
                         <div class="custom-timer">
                             <input type="number" id="customTime" min="1" max="120" value="25">
-                            <span>分钟</span>
-                            <button id="startTimer">开始专注</button>
+                            <span data-i18n="minutes_unit">分钟</span>
+                            <button id="startTimer" data-i18n="start_focus">开始专注</button>
                         </div>
                         <!-- 新增结束时间设置 -->
                         <div class="end-time-picker" id="endTimePicker" style="display: none;">
                             <input type="time" id="endTimeInput">
-                            <button id="setEndTime">设置结束时间</button>
+                            <button id="setEndTime" data-i18n="set_end_time">设置结束时间</button>
                         </div>
                         <div class="schedule-timer">
                             <input type="number" id="scheduleTime" min="1" max="1440" value="30">
-                            <span>分钟后启动</span>
-                            <button id="scheduleButton">预约启动</button>
+                            <span data-i18n="minutes_later_start">分钟后启动</span>
+                            <button id="scheduleButton" data-i18n="schedule_start">预约启动</button>
                         </div>
                         <div class="schedule-status" id="scheduleStatus"></div>
                         
                         <div class="custom-time-plan">
-                            <button id="createTimePlan" class="secondary-button">创建时间方案</button>
+                            <button id="createTimePlan" class="secondary-button" data-i18n="create_time_plan">创建时间方案</button>
                             <div class="saved-plans" id="savedPlans">
                                 <!-- 已保存的方案将在这里显示 -->
                             </div>
@@ -103,55 +104,55 @@
                 </div>
                 
                 <div class="control-group">
-                    <h3>番茄工作法</h3>
+                    <h3 data-i18n="pomodoro_technique">番茄工作法</h3>
                     <div class="pomodoro-controls">
-                        <button id="startPomodoro">开始番茄工作法</button>
+                        <button id="startPomodoro" data-i18n="start_pomodoro">开始番茄工作法</button>
                         <div class="pomodoro-status">
-                            <span id="pomodoroStatus">准备就绪</span>
+                            <span id="pomodoroStatus" data-i18n="ready">准备就绪</span>
                             <span id="pomodoroTime">25:00</span>
                         </div>
                     </div>
                 </div>
                 
                 <div class="control-group">
-                    <h3>社交专注</h3>
+                    <h3 data-i18n="social_focus">社交专注</h3>
                     <div class="social-focus-controls">
                         <div class="focus-session">
-                            <h4>创建专注会话</h4>
-                            <input type="text" id="sessionName" placeholder="专注会话名称" maxlength="20">
-                            <button id="createSession" class="primary-button">创建专注会话</button>
+                            <h4 data-i18n="create_focus_session">创建专注会话</h4>
+                            <input type="text" id="sessionName" placeholder="专注会话名称" maxlength="20" data-i18n="focus_session_name">
+                            <button id="createSession" class="primary-button" data-i18n="create_focus_session_btn">创建专注会话</button>
                         </div>
                         <div class="invite-friends">
-                            <h4>邀请好友</h4>
-                            <input type="text" id="friendEmail" placeholder="好友邮箱地址">
-                            <button id="inviteFriend" class="secondary-button">邀请好友</button>
+                            <h4 data-i18n="invite_friends">邀请好友</h4>
+                            <input type="text" id="friendEmail" placeholder="好友邮箱地址" data-i18n="friend_email_placeholder">
+                            <button id="inviteFriend" class="secondary-button" data-i18n="invite_friend_btn">邀请好友</button>
                         </div>
                         <div class="active-session" id="activeSession" style="display: none;">
                             <div class="session-info">
-                                <h4>当前会话: <span id="currentSessionName">-</span></h4>
-                                <div class="session-code">会话码: <span id="sessionCode">-</span></div>
+                                <h4 data-i18n="current_session">当前会话: <span id="currentSessionName">-</span></h4>
+                                <div class="session-code" data-i18n="session_code">会话码: <span id="sessionCode">-</span></div>
                             </div>
                             <div class="session-members">
-                                <h4>参与成员 (<span id="memberCount">1</span>)</h4>
+                                <h4 data-i18n="participants">参与成员 (<span id="memberCount">1</span>)</h4>
                                 <ul id="membersList">
                                     <li class="member-item">
-                                        <span class="member-name">我 (主持人)</span>
-                                        <span class="member-status">专注中</span>
+                                        <span class="member-name" data-i18n="me_host">我 (主持人)</span>
+                                        <span class="member-status" data-i18n="focusing">专注中</span>
                                     </li>
                                 </ul>
                             </div>
                             <div class="session-stats" id="sessionStats">
                                 <div class="stat-item">
                                     <span class="stat-value">1</span>
-                                    <span class="stat-label">总成员</span>
+                                    <span class="stat-label" data-i18n="total_members">总成员</span>
                                 </div>
                                 <div class="stat-item">
                                     <span class="stat-value">1</span>
-                                    <span class="stat-label">专注中</span>
+                                    <span class="stat-label" data-i18n="focusing_members">专注中</span>
                                 </div>
                                 <div class="stat-item">
                                     <span class="stat-value">0</span>
-                                    <span class="stat-label">已完成</span>
+                                    <span class="stat-label" data-i18n="completed_members">已完成</span>
                                 </div>
                             </div>
                             <div class="sync-control">
@@ -159,35 +160,35 @@
                                     <input type="checkbox" id="syncToggle">
                                     <span class="slider round"></span>
                                 </label>
-                                <span>同步专注状态</span>
+                                <span data-i18n="sync_status">同步专注状态</span>
                             </div>
                             <div class="chat-container" id="chatContainer">
-                                <h4>会话聊天</h4>
+                                <h4 data-i18n="session_chat">会话聊天</h4>
                                 <div class="chat-messages" id="chatMessages"></div>
                                 <div class="chat-input-container">
-                                    <input type="text" id="chatInput" placeholder="输入消息...">
-                                    <button id="sendMessage">发送</button>
+                                    <input type="text" id="chatInput" placeholder="输入消息..." data-i18n="enter_message">
+                                    <button id="sendMessage" data-i18n="send">发送</button>
                                 </div>
                             </div>
                             <div class="session-actions">
-                                <button id="leaveSession" class="danger-button">退出会话</button>
-                                <button id="copyInviteLink" class="secondary-button">复制邀请链接</button>
+                                <button id="leaveSession" class="danger-button" data-i18n="leave_session">退出会话</button>
+                                <button id="copyInviteLink" class="secondary-button" data-i18n="copy_invite_link">复制邀请链接</button>
                             </div>
                         </div>
                         <div class="join-session">
-                            <h4>加入专注小组</h4>
-                            <input type="text" id="joinCode" placeholder="输入会话码">
-                            <button id="joinSession" class="primary-button">加入会话</button>
+                            <h4 data-i18n="join_focus_group">加入专注小组</h4>
+                            <input type="text" id="joinCode" placeholder="输入会话码" data-i18n="enter_session_code">
+                            <button id="joinSession" class="primary-button" data-i18n="join_session">加入会话</button>
                         </div>
                         
                         <!-- 添加专注排行榜部分 -->
                         <div class="focus-leaderboard">
-                            <h4>专注排行榜</h4>
+                            <h4 data-i18n="focus_leaderboard">专注排行榜</h4>
                             <div class="leaderboard-container" id="leaderboardContainer">
                                 <div class="leaderboard-header">
-                                    <span class="rank-column">排名</span>
-                                    <span class="name-column">用户</span>
-                                    <span class="time-column">专注时间</span>
+                                    <span class="rank-column" data-i18n="rank">排名</span>
+                                    <span class="name-column" data-i18n="user">用户</span>
+                                    <span class="time-column" data-i18n="focus_time">专注时间</span>
                                 </div>
                                 <ul class="leaderboard-list" id="leaderboardList">
                                     <!-- 排行榜数据将通过JavaScript动态加载 -->
@@ -202,10 +203,10 @@
                 <div class="screen-preview" id="screenPreview">
                     <div class="preview-content">
                         <div class="preview-timer" id="previewTimer">25:00</div>
-                        <div class="preview-message" style="display: none;">专注模式已启动</div>
+                        <div class="preview-message" style="display: none;" data-i18n="focus_mode_started">专注模式已启动</div>
                     </div>
                 </div>
-                <button class="screen-mode" data-mode="fullscreen">全屏</button>
+                <button class="screen-mode" data-mode="fullscreen" data-i18n="fullscreen">全屏</button>
 
                 <!-- 示例：为元素添加data-i18n属性 -->
                 <h1 data-i18n="hero_title">解锁专注力的游戏</h1>
@@ -231,8 +232,8 @@
         </div>
         
         <div class="playground-cta">
-            <p>想要体验更多高级功能？</p>
-            <a href="#download" class="primary-button">立即下载完整版</a>
+            <p data-i18n="more_features">想要体验更多高级功能？</p>
+            <a href="#download" class="primary-button" data-i18n="download_full">立即下载完整版</a>
         </div>
     </div>
 </section>
@@ -246,25 +247,25 @@
             <nav class="navbar">
                 <!-- 修改 logo 图片 -->
                 <div class="logo">
-                    <img src="img/logo.png" alt="ShareBlackScreen Logo" width="180" height="40">
+                    <img src="img/logo.svg" alt="ShareBlackScreen Logo" width="180" height="40" data-i18n="app_logo_alt">
                 </div>
                 
                 <div class="nav-cta">
-                    <a href="#download" class="cta-button pulse-animation">立即下载</a>
+                    <a href="#download" class="cta-button pulse-animation" data-i18n="download">立即下载</a>
                 </div>
             </nav>
             
             <div class="hero-content">
                 <div class="hero-text">
-                    <h1>解锁专注力的游戏</h1>
-                    <h2>多功能屏幕管理工具，让专注成为一种享受</h2>
-                    <p>ShareBlackScreen 帮助你减少干扰、保护视力、提高专注力，并通过社交分享功能，让专注成为一种可共享的体验。</p>
+                    <h1 data-i18n="hero_title">解锁专注力的游戏</h1>
+                    <h2 data-i18n="hero_subtitle">多功能屏幕管理工具，让专注成为一种享受</h2>
+                    <p data-i18n="hero_description">ShareBlackScreen 帮助你减少干扰、保护视力、提高专注力，并通过社交分享功能，让专注成为一种可共享的体验。</p>
                     
                     <div class="hero-cta">
-                        <a href="#download" class="primary-button glow-animation">
+                        <a href="#download" class="primary-button glow-animation" data-i18n="free_start">
                             <i class="fas fa-download"></i> 免费开始专注之旅
                         </a>
-                        <a href="#features" class="secondary-button">
+                        <a href="#features" class="secondary-button" data-i18n="learn_more">
                             <i class="fas fa-info-circle"></i> 了解更多
                         </a>
                     </div>
@@ -272,24 +273,24 @@
                     <div class="hero-stats">
                         <div class="stat-item">
                             <span class="stat-number">50,000+</span>
-                            <span class="stat-label">活跃用户</span>
+                            <span class="stat-label" data-i18n="active_users">活跃用户</span>
                         </div>
                         <div class="stat-item">
                             <span class="stat-number">4.8</span>
-                            <span class="stat-label">用户评分</span>
+                            <span class="stat-label" data-i18n="user_rating">用户评分</span>
                         </div>
                         <div class="stat-item">
                             <span class="stat-number">1M+</span>
-                            <span class="stat-label">专注小时</span>
+                            <span class="stat-label" data-i18n="focus_hours">专注小时</span>
                         </div>
                     </div>
                 </div>
                 
                 <!-- 修改 Hero 部分的图片 -->
                 <div class="hero-image">
-                    <img src="img/hero-app.png" alt="ShareBlackScreen 应用预览" width="600" height="400" loading="lazy">
+                    <img src="img/hero-app.svg" alt="ShareBlackScreen 应用预览" width="600" height="400" loading="lazy" data-i18n="app_preview_alt">
                     <div class="floating-badge limited-offer">
-                        <span class="badge-text">限时优惠</span>
+                        <span class="badge-text" data-i18n="limited_offer">限时优惠</span>
                         <span class="badge-discount">50% OFF</span>
                         <div class="countdown-timer" id="heroCountdown">23:59:59</div>
                     </div>
@@ -303,45 +304,45 @@
     <!-- Pain Points Section -->
     <section class="pain-points-section" id="pain-points">
         <div class="container">
-            <h2 class="section-title">你是否经常面临这些问题？</h2>
+            <h2 class="section-title" data-i18n="pain_points_title">你是否经常面临这些问题？</h2>
             
             <div class="pain-points-grid">
                 <div class="pain-point-card">
                     <div class="pain-point-icon">
                         <i class="fas fa-eye-slash"></i>
                     </div>
-                    <h3>视力疲劳</h3>
-                    <p>长时间盯着屏幕导致眼睛干涩、疲劳，甚至头痛</p>
+                    <h3 data-i18n="eye_fatigue">视力疲劳</h3>
+                    <p data-i18n="eye_fatigue_desc">长时间盯着屏幕导致眼睛干涩、疲劳，甚至头痛</p>
                 </div>
                 
                 <div class="pain-point-card">
                     <div class="pain-point-icon">
                         <i class="fas fa-bell"></i>
                     </div>
-                    <h3>不断分心</h3>
-                    <p>社交媒体通知、邮件提醒不断打断工作流</p>
+                    <h3 data-i18n="distraction">不断分心</h3>
+                    <p data-i18n="distraction_desc">社交媒体通知、邮件提醒不断打断工作流</p>
                 </div>
                 
                 <div class="pain-point-card">
                     <div class="pain-point-icon">
                         <i class="fas fa-hourglass-half"></i>
                     </div>
-                    <h3>时间管理差</h3>
-                    <p>无法有效规划和追踪专注时间，效率低下</p>
+                    <h3 data-i18n="time_management">时间管理差</h3>
+                    <p data-i18n="time_management_desc">无法有效规划和追踪专注时间，效率低下</p>
                 </div>
                 
                 <div class="pain-point-card">
                     <div class="pain-point-icon">
                         <i class="fas fa-users-slash"></i>
                     </div>
-                    <h3>缺乏激励</h3>
-                    <p>独自专注缺乏动力，难以坚持良好习惯</p>
+                    <h3 data-i18n="lack_motivation">缺乏激励</h3>
+                    <p data-i18n="lack_motivation_desc">独自专注缺乏动力，难以坚持良好习惯</p>
                 </div>
             </div>
             
             <div class="pain-points-cta">
                 <a href="#solution" class="scroll-button">
-                    <span>发现解决方案</span>
+                    <span data-i18n="discover_solution">发现解决方案</span>
                     <i class="fas fa-chevron-down"></i>
                 </a>
             </div>
@@ -352,14 +353,14 @@
     <section class="solution-section" id="solution">
         <div class="container">
             <div class="section-header">
-                <h2 class="section-title">ShareBlackScreen：专注力提升的游戏化解决方案</h2>
-                <p class="section-subtitle">一款革命性的屏幕管理工具，将专注变成一场有趣的游戏</p>
+                <h2 class="section-title" data-i18n="solution_title">ShareBlackScreen：专注力提升的游戏化解决方案</h2>
+                <p class="section-subtitle" data-i18n="solution_subtitle">一款革命性的屏幕管理工具，将专注变成一场有趣的游戏</p>
             </div>
             
             <div class="video-container">
-                <video controls poster="img/video-poster.webp" width="800" height="450">
+                <video controls poster="img/video-poster.svg" width="800" height="450">
                     <source src="video/shareblackscreen-demo.mp4" type="video/mp4">
-                    您的浏览器不支持视频标签。
+                    <span data-i18n="video_not_supported">您的浏览器不支持视频标签。</span>
                 </video>
                 <div class="video-overlay">
                     <button class="play-button" id="playVideo">
@@ -370,27 +371,27 @@
             
             <div class="solution-benefits">
                 <div class="benefit-card">
-                    <img src="img/eye-protection.webp" alt="保护视力" width="80" height="80">
-                    <h3>保护视力</h3>
-                    <p>多种屏幕模式减少蓝光伤害，缓解眼部疲劳</p>
+                    <img src="img/eye-protection.svg" alt="保护视力" width="80" height="80" data-i18n="eye_protection_alt">
+                    <h3 data-i18n="eye_protection">保护视力</h3>
+                    <p data-i18n="eye_protection_desc">多种屏幕模式减少蓝光伤害，缓解眼部疲劳</p>
                 </div>
                 
                 <div class="benefit-card">
-                    <img src="img/focus-boost.webp" alt="提升专注力" width="80" height="80">
-                    <h3>提升专注力</h3>
-                    <p>屏蔽干扰，创造理想的专注环境</p>
+                    <img src="img/focus-boost.svg" alt="提升专注力" width="80" height="80" data-i18n="focus_boost_alt">
+                    <h3 data-i18n="focus_boost">提升专注力</h3>
+                    <p data-i18n="focus_boost_desc">屏蔽干扰，创造理想的专注环境</p>
                 </div>
                 
                 <div class="benefit-card">
-                    <img src="img/time-management.webp" alt="时间管理" width="80" height="80">
-                    <h3>时间管理</h3>
-                    <p>内置番茄工作法，优化工作休息循环</p>
+                    <img src="img/time-management.svg" alt="时间管理" width="80" height="80" data-i18n="time_management_alt">
+                    <h3 data-i18n="time_management_title">时间管理</h3>
+                    <p data-i18n="time_management_solution_desc">内置番茄工作法，优化工作休息循环</p>
                 </div>
                 
                 <div class="benefit-card">
-                    <img src="img/social-motivation.webp" alt="社交激励" width="80" height="80">
-                    <h3>社交激励</h3>
-                    <p>与朋友共同专注，互相激励进步</p>
+                    <img src="img/social-motivation.svg" alt="社交激励" width="80" height="80" data-i18n="social_motivation_alt">
+                    <h3 data-i18n="social_motivation">社交激励</h3>
+                    <p data-i18n="social_motivation_desc">与朋友共同专注，互相激励进步</p>
                 </div>
             </div>
         </div>
@@ -399,31 +400,31 @@
     <!-- Features Section -->
     <section class="features-section" id="features">
         <div class="container">
-            <h2 class="section-title">游戏化功能，提升专注体验</h2>
+            <h2 class="section-title" data-i18n="features_title">游戏化功能，提升专注体验</h2>
             
             <div class="feature-tabs">
                 <div class="tab-navigation">
-                    <button class="tab-button active" data-tab="screen-modes">屏幕模式</button>
-                    <button class="tab-button" data-tab="time-management">时间管理</button>
-                    <button class="tab-button" data-tab="social-features">社交功能</button>
-                    <button class="tab-button" data-tab="data-analysis">数据分析</button>
+                    <button class="tab-button active" data-tab="screen-modes" data-i18n="screen_modes_tab">屏幕模式</button>
+                    <button class="tab-button" data-tab="time-management" data-i18n="time_management_tab">时间管理</button>
+                    <button class="tab-button" data-tab="social-features" data-i18n="social_features_tab">社交功能</button>
+                    <button class="tab-button" data-tab="data-analysis" data-i18n="data_analysis_tab">数据分析</button>
                 </div>
                 
                 <div class="tab-content">
                     <div class="tab-pane active" id="screen-modes">
                         <div class="feature-content">
                             <div class="feature-text">
-                                <h3>多样化屏幕模式</h3>
+                                <h3 data-i18n="screen_modes_title">多样化屏幕模式</h3>
                                 <ul class="feature-list">
-                                    <li><i class="fas fa-check-circle"></i> <strong>黑屏模式</strong>：提供纯黑屏幕，减少视觉干扰</li>
-                                    <li><i class="fas fa-check-circle"></i> <strong>彩色模式</strong>：支持多种颜色选项（黑色、白色、蓝色、绿色等）</li>
-                                    <li><i class="fas fa-check-circle"></i> <strong>透明度调节</strong>：允许用户调整屏幕透明度（0%-100%）</li>
-                                    <li><i class="fas fa-check-circle"></i> <strong>渐变模式</strong>：支持双色渐变效果</li>
+                                    <li><i class="fas fa-check-circle"></i> <strong data-i18n="black_screen_mode">黑屏模式</strong>：<span data-i18n="black_screen_desc">提供纯黑屏幕，减少视觉干扰</span></li>
+                                    <li><i class="fas fa-check-circle"></i> <strong data-i18n="color_mode">彩色模式</strong>：<span data-i18n="color_mode_desc">支持多种颜色选项（黑色、白色、蓝色、绿色等）</span></li>
+                                    <li><i class="fas fa-check-circle"></i> <strong data-i18n="opacity_adjustment_feature">透明度调节</strong>：<span data-i18n="opacity_adjustment_desc">允许用户调整屏幕透明度（0%-100%）</span></li>
+                                    <li><i class="fas fa-check-circle"></i> <strong data-i18n="gradient_mode">渐变模式</strong>：<span data-i18n="gradient_mode_desc">支持双色渐变效果</span></li>
                                 </ul>
-                                <a href="#download" class="feature-cta">立即体验多样化屏幕模式</a>
+                                <a href="#download" class="feature-cta" data-i18n="try_screen_modes">立即体验多样化屏幕模式</a>
                             </div>
                             <div class="feature-image">
-                                <img src="img/screen-modes.webp" alt="多样化屏幕模式" width="500" height="300" loading="lazy">
+                                <img src="img/screen-modes.svg" alt="多样化屏幕模式" width="500" height="300" loading="lazy" data-i18n="screen_modes_img_alt">
                             </div>
                         </div>
                     </div>
@@ -431,34 +432,34 @@
                     <div class="tab-pane" id="time-management">
                         <div class="feature-content">
                             <div class="feature-text">
-                                <h3>时间管理功能</h3>
+                                <h3 data-i18n="time_management_feature_title">时间管理功能</h3>
                                 <ul class="feature-list">
-                                    <li><i class="fas fa-check-circle"></i> <strong>定时器</strong>：设置屏幕模式自动切换时间</li>
-                                    <li><i class="fas fa-check-circle"></i> <strong>番茄工作法</strong>：内置25/5分钟工作休息循环</li>
-                                    <li><i class="fas fa-check-circle"></i> <strong>自定义时间段</strong>：允许用户创建个性化时间管理方案</li>
-                                    <li><i class="fas fa-check-circle"></i> <strong>专注提醒</strong>：智能提醒休息和恢复专注</li>
+                                    <li><i class="fas fa-check-circle"></i> <strong data-i18n="timer_feature">定时器</strong>：<span data-i18n="timer_desc">设置屏幕模式自动切换时间</span></li>
+                                    <li><i class="fas fa-check-circle"></i> <strong data-i18n="pomodoro_feature">番茄工作法</strong>：<span data-i18n="pomodoro_desc">内置25/5分钟工作休息循环</span></li>
+                                    <li><i class="fas fa-check-circle"></i> <strong data-i18n="custom_time_feature">自定义时间段</strong>：<span data-i18n="custom_time_desc">允许用户创建个性化时间管理方案</span></li>
+                                    <li><i class="fas fa-check-circle"></i> <strong data-i18n="focus_reminder">专注提醒</strong>：<span data-i18n="focus_reminder_desc">智能提醒休息和恢复专注</span></li>
                                 </ul>
-                                <a href="#download" class="feature-cta">立即体验时间管理功能</a>
+                                <a href="#download" class="feature-cta" data-i18n="try_time_management">立即体验时间管理功能</a>
                             </div>
                             <div class="feature-image">
-                                <img src="img/time-management-feature.webp" alt="时间管理功能" width="500" height="300">
+                                <img src="img/time-management-feature.svg" alt="时间管理功能" width="500" height="300" data-i18n="time_management_img_alt">
                             </div>
                         </div>
                     </div>
                     <div class="tab-pane" id="social-features">
                         <div class="feature-content">
                             <div class="feature-text">
-                                <h3>社交分享功能</h3>
+                                <h3 data-i18n="social_features_title">社交分享功能</h3>
                                 <ul class="feature-list">
-                                    <li><i class="fas fa-check-circle"></i> <strong>专注状态分享</strong>：分享当前专注状态到社交媒体</li>
-                                    <li><i class="fas fa-check-circle"></i> <strong>专注小组</strong>：创建或加入专注小组，与朋友共同保持专注</li>
-                                    <li><i class="fas fa-check-circle"></i> <strong>专注排行榜</strong>：展示好友间的专注时间排名</li>
-                                    <li><i class="fas fa-check-circle"></i> <strong>成就系统</strong>：解锁专注成就，获得虚拟奖励</li>
+                                    <li><i class="fas fa-check-circle"></i> <strong data-i18n="focus_status_share">专注状态分享</strong>：<span data-i18n="focus_status_share_desc">分享当前专注状态到社交媒体</span></li>
+                                    <li><i class="fas fa-check-circle"></i> <strong data-i18n="focus_group">专注小组</strong>：<span data-i18n="focus_group_desc">创建或加入专注小组，与朋友共同保持专注</span></li>
+                                    <li><i class="fas fa-check-circle"></i> <strong data-i18n="focus_leaderboard_feature">专注排行榜</strong>：<span data-i18n="focus_leaderboard_desc">展示好友间的专注时间排名</span></li>
+                                    <li><i class="fas fa-check-circle"></i> <strong data-i18n="achievement_system">成就系统</strong>：<span data-i18n="achievement_system_desc">解锁专注成就，获得虚拟奖励</span></li>
                                 </ul>
-                                <a href="#download" class="feature-cta">立即体验社交分享功能</a>
+                                <a href="#download" class="feature-cta" data-i18n="try_social_features">立即体验社交分享功能</a>
                             </div>
                             <div class="feature-image">
-                                <img src="img/social-features.webp" alt="社交分享功能" width="500" height="300">
+                                <img src="img/social-features.svg" alt="社交分享功能" width="500" height="300" data-i18n="social_features_img_alt">
                             </div>
                         </div>
                     </div>
@@ -466,17 +467,17 @@
                     <div class="tab-pane" id="data-analysis">
                         <div class="feature-content">
                             <div class="feature-text">
-                                <h3>数据统计与分析</h3>
+                                <h3 data-i18n="data_analysis_title">数据统计与分析</h3>
                                 <ul class="feature-list">
-                                    <li><i class="fas fa-check-circle"></i> <strong>专注时间统计</strong>：记录每日/每周/每月专注时间</li>
-                                    <li><i class="fas fa-check-circle"></i> <strong>专注习惯分析</strong>：分析用户专注模式和最佳专注时段</li>
-                                    <li><i class="fas fa-check-circle"></i> <strong>目标设定与追踪</strong>：设定专注时间目标并追踪完成情况</li>
-                                    <li><i class="fas fa-check-circle"></i> <strong>进度可视化</strong>：通过图表直观展示专注进度</li>
+                                    <li><i class="fas fa-check-circle"></i> <strong data-i18n="focus_time_stats">专注时间统计</strong>：<span data-i18n="focus_time_stats_desc">记录每日/每周/每月专注时间</span></li>
+                                    <li><i class="fas fa-check-circle"></i> <strong data-i18n="focus_habit_analysis">专注习惯分析</strong>：<span data-i18n="focus_habit_analysis_desc">分析用户专注模式和最佳专注时段</span></li>
+                                    <li><i class="fas fa-check-circle"></i> <strong data-i18n="goal_tracking">目标设定与追踪</strong>：<span data-i18n="goal_tracking_desc">设定专注时间目标并追踪完成情况</span></li>
+                                    <li><i class="fas fa-check-circle"></i> <strong data-i18n="progress_visualization">进度可视化</strong>：<span data-i18n="progress_visualization_desc">通过图表直观展示专注进度</span></li>
                                 </ul>
-                                <a href="#download" class="feature-cta">立即体验数据分析功能</a>
+                                <a href="#download" class="feature-cta" data-i18n="try_data_analysis">立即体验数据分析功能</a>
                             </div>
                             <div class="feature-image">
-                                <img src="img/data-analysis.webp" alt="数据统计与分析" width="500" height="300">
+                                <img src="img/data-analysis.svg" alt="数据统计与分析" width="500" height="300" data-i18n="data_analysis_img_alt">
                             </div>
                         </div>
                     </div>
@@ -488,8 +489,8 @@
     <!-- Testimonials Section -->
     <section class="testimonials-section" id="testimonials">
         <div class="container">
-            <h2 class="section-title">用户如何评价我们</h2>
-            <p class="section-subtitle">来自真实用户的专注体验分享</p>
+            <h2 class="section-title" data-i18n="testimonials_title">用户如何评价我们</h2>
+            <p class="section-subtitle" data-i18n="testimonials_subtitle">来自真实用户的专注体验分享</p>
             
             <div class="testimonials-slider" id="testimonialsSlider">
                 <div class="testimonial-card">
@@ -500,12 +501,12 @@
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
                     </div>
-                    <p class="testimonial-text">"ShareBlackScreen彻底改变了我的工作方式！多样化的屏幕模式让我的眼睛不再疲劳，番茄工作法功能帮助我更有效地管理时间。强烈推荐给所有需要提高专注力的人！"</p>
+                    <p class="testimonial-text" data-i18n="testimonial_1">"ShareBlackScreen彻底改变了我的工作方式！多样化的屏幕模式让我的眼睛不再疲劳，番茄工作法功能帮助我更有效地管理时间。强烈推荐给所有需要提高专注力的人！"</p>
                     <div class="testimonial-author">
-                        <img src="img/user-1.webp" alt="张明" class="author-avatar" width="60" height="60">
+                        <img src="img/user-1.svg" alt="张明" class="author-avatar" width="60" height="60" data-i18n="user_1_img_alt">
                         <div class="author-info">
-                            <h4>张明</h4>
-                            <p>自由职业者</p>
+                            <h4 data-i18n="user_1_name">张明</h4>
+                            <p data-i18n="user_1_title">自由职业者</p>
                         </div>
                     </div>
                 </div>
@@ -518,12 +519,12 @@
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
                     </div>
-                    <p class="testimonial-text">"作为一名程序员，我经常需要长时间盯着屏幕。ShareBlackScreen的黑屏模式和定时休息提醒功能极大地减轻了我的视觉疲劳。社交功能也很棒，能和同事一起专注工作！"</p>
+                    <p class="testimonial-text" data-i18n="testimonial_2">"作为一名程序员，我经常需要长时间盯着屏幕。ShareBlackScreen的黑屏模式和定时休息提醒功能极大地减轻了我的视觉疲劳。社交功能也很棒，能和同事一起专注工作！"</p>
                     <div class="testimonial-author">
-                        <img src="img/user-2.webp" alt="李华" class="author-avatar" width="60" height="60">
+                        <img src="img/user-2.svg" alt="李华" class="author-avatar" width="60" height="60" data-i18n="user_2_img_alt">
                         <div class="author-info">
-                            <h4>李华</h4>
-                            <p>软件工程师</p>
+                            <h4 data-i18n="user_2_name">李华</h4>
+                            <p data-i18n="user_2_title">软件工程师</p>
                         </div>
                     </div>
                 </div>
@@ -536,12 +537,12 @@
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star-half-alt"></i>
                     </div>
-                    <p class="testimonial-text">"我是一名学生，经常被社交媒体分心。ShareBlackScreen帮助我屏蔽干扰，专注学习。数据分析功能让我清楚地看到自己的进步，非常有成就感！"</p>
+                    <p class="testimonial-text" data-i18n="testimonial_3">"我是一名学生，经常被社交媒体分心。ShareBlackScreen帮助我屏蔽干扰，专注学习。数据分析功能让我清楚地看到自己的进步，非常有成就感！"</p>
                     <div class="testimonial-author">
-                        <img src="img/user-3.webp" alt="王小雨" class="author-avatar" width="60" height="60">
+                        <img src="img/user-3.svg" alt="王小雨" class="author-avatar" width="60" height="60" data-i18n="user_3_img_alt">
                         <div class="author-info">
-                            <h4>王小雨</h4>
-                            <p>大学生</p>
+                            <h4 data-i18n="user_3_name">王小雨</h4>
+                            <p data-i18n="user_3_title">大学生</p>
                         </div>
                     </div>
                 </div>
@@ -550,15 +551,15 @@
             <div class="testimonials-stats">
                 <div class="stat-box">
                     <span class="stat-number">98%</span>
-                    <span class="stat-text">用户报告专注力提升</span>
+                    <span class="stat-text" data-i18n="focus_improvement_stat">用户报告专注力提升</span>
                 </div>
                 <div class="stat-box">
                     <span class="stat-number">85%</span>
-                    <span class="stat-text">用户视力疲劳减轻</span>
+                    <span class="stat-text" data-i18n="eye_fatigue_reduction_stat">用户视力疲劳减轻</span>
                 </div>
                 <div class="stat-box">
                     <span class="stat-number">92%</span>
-                    <span class="stat-text">用户工作效率提高</span>
+                    <span class="stat-text" data-i18n="efficiency_improvement_stat">用户工作效率提高</span>
                 </div>
             </div>
         </div>
@@ -567,66 +568,66 @@
     <!-- Pricing Section -->
     <section class="pricing-section" id="pricing">
         <div class="container">
-            <h2 class="section-title">选择适合你的专注计划</h2>
-            <p class="section-subtitle">灵活的价格方案，满足不同需求</p>
+            <h2 class="section-title" data-i18n="pricing_title">选择适合你的专注计划</h2>
+            <p class="section-subtitle" data-i18n="pricing_subtitle">灵活的价格方案，满足不同需求</p>
             
             <div class="pricing-cards">
                 <div class="pricing-card basic">
                     <div class="pricing-header">
-                        <h3 class="plan-name">基础版</h3>
+                        <h3 class="plan-name" data-i18n="basic_plan">基础版</h3>
                         <div class="plan-price">
-                            <span class="currency">¥</span>
+                            <span class="currency" data-i18n="currency_symbol">¥</span>
                             <span class="amount">0</span>
-                            <span class="period">/永久</span>
+                            <span class="period" data-i18n="forever_period">/永久</span>
                         </div>
                     </div>
                     
                     <div class="pricing-features">
                         <ul>
-                            <li><i class="fas fa-check"></i> 基础黑屏模式</li>
-                            <li><i class="fas fa-check"></i> 简单定时器功能</li>
-                            <li><i class="fas fa-check"></i> 基础专注统计</li>
-                            <li><i class="fas fa-times"></i> 高级屏幕模式</li>
-                            <li><i class="fas fa-times"></i> 社交分享功能</li>
-                            <li><i class="fas fa-times"></i> 数据分析与可视化</li>
-                            <li><i class="fas fa-times"></i> 专注小组功能</li>
+                            <li><i class="fas fa-check"></i> <span data-i18n="basic_black_screen">基础黑屏模式</span></li>
+                            <li><i class="fas fa-check"></i> <span data-i18n="simple_timer">简单定时器功能</span></li>
+                            <li><i class="fas fa-check"></i> <span data-i18n="basic_focus_stats">基础专注统计</span></li>
+                            <li><i class="fas fa-times"></i> <span data-i18n="advanced_screen_modes">高级屏幕模式</span></li>
+                            <li><i class="fas fa-times"></i> <span data-i18n="social_sharing">社交分享功能</span></li>
+                            <li><i class="fas fa-times"></i> <span data-i18n="data_analysis_visualization">数据分析与可视化</span></li>
+                            <li><i class="fas fa-times"></i> <span data-i18n="focus_group_feature">专注小组功能</span></li>
                         </ul>
                     </div>
                     
                     <div class="pricing-footer">
-                        <a href="#download" class="pricing-button">免费开始</a>
+                        <a href="#download" class="pricing-button" data-i18n="free_start_button">免费开始</a>
                     </div>
                 </div>
                 
                 <div class="pricing-card popular">
-                    <div class="popular-badge">最受欢迎</div>
+                    <div class="popular-badge" data-i18n="most_popular">最受欢迎</div>
                     <div class="pricing-header">
-                        <h3 class="plan-name">专业版</h3>
+                        <h3 class="plan-name" data-i18n="pro_plan">专业版</h3>
                         <div class="plan-price">
-                            <span class="original-price">¥99</span>
-                            <span class="currency">¥</span>
+                            <span class="original-price" data-i18n="original_price">¥99</span>
+                            <span class="currency" data-i18n="currency_symbol">¥</span>
                             <span class="amount">49</span>
-                            <span class="period">/年</span>
+                            <span class="period" data-i18n="yearly_period">/年</span>
                         </div>
-                        <div class="discount-tag">限时5折优惠</div>
+                        <div class="discount-tag" data-i18n="limited_discount">限时5折优惠</div>
                     </div>
                     
                     <div class="pricing-features">
                         <ul>
-                            <li><i class="fas fa-check"></i> 所有基础版功能</li>
-                            <li><i class="fas fa-check"></i> 全部高级屏幕模式</li>
-                            <li><i class="fas fa-check"></i> 番茄工作法计时器</li>
-                            <li><i class="fas fa-check"></i> 社交分享功能</li>
-                            <li><i class="fas fa-check"></i> 基础数据分析</li>
-                            <li><i class="fas fa-check"></i> 专注小组（最多5人）</li>
-                            <li><i class="fas fa-times"></i> 高级数据可视化</li>
+                            <li><i class="fas fa-check"></i> <span data-i18n="all_basic_features">所有基础版功能</span></li>
+                            <li><i class="fas fa-check"></i> <span data-i18n="all_advanced_screen_modes">全部高级屏幕模式</span></li>
+                            <li><i class="fas fa-check"></i> <span data-i18n="pomodoro_timer">番茄工作法计时器</span></li>
+                            <li><i class="fas fa-check"></i> <span data-i18n="social_sharing_feature">社交分享功能</span></li>
+                            <li><i class="fas fa-check"></i> <span data-i18n="basic_data_analysis">基础数据分析</span></li>
+                            <li><i class="fas fa-check"></i> <span data-i18n="focus_group_limited">专注小组（最多5人）</span></li>
+                            <li><i class="fas fa-times"></i> <span data-i18n="advanced_data_visualization">高级数据可视化</span></li>
                         </ul>
                     </div>
                     
                     <div class="pricing-footer">
-                        <a href="#download" class="pricing-button">立即购买</a>
+                        <a href="#download" class="pricing-button" data-i18n="buy_now">立即购买</a>
                         <div class="countdown-container">
-                            <p>优惠倒计时：</p>
+                            <p data-i18n="discount_countdown">优惠倒计时：</p>
                             <div class="countdown-timer" id="pricingCountdown">23:59:59</div>
                         </div>
                     </div>
@@ -634,35 +635,35 @@
                 
                 <div class="pricing-card premium">
                     <div class="pricing-header">
-                        <h3 class="plan-name">尊享版</h3>
+                        <h3 class="plan-name" data-i18n="premium_plan">尊享版</h3>
                         <div class="plan-price">
-                            <span class="currency">¥</span>
+                            <span class="currency" data-i18n="currency_symbol">¥</span>
                             <span class="amount">99</span>
-                            <span class="period">/年</span>
+                            <span class="period" data-i18n="yearly_period">/年</span>
                         </div>
                     </div>
                     
                     <div class="pricing-features">
                         <ul>
-                            <li><i class="fas fa-check"></i> 所有专业版功能</li>
-                            <li><i class="fas fa-check"></i> 自定义屏幕模式</li>
-                            <li><i class="fas fa-check"></i> 高级数据分析与可视化</li>
-                            <li><i class="fas fa-check"></i> 无限专注小组成员</li>
-                            <li><i class="fas fa-check"></i> 专属成就系统</li>
-                            <li><i class="fas fa-check"></i> 优先客户支持</li>
-                            <li><i class="fas fa-check"></i> 跨设备同步</li>
+                            <li><i class="fas fa-check"></i> <span data-i18n="all_pro_features">所有专业版功能</span></li>
+                            <li><i class="fas fa-check"></i> <span data-i18n="custom_screen_modes">自定义屏幕模式</span></li>
+                            <li><i class="fas fa-check"></i> <span data-i18n="advanced_data_analysis">高级数据分析与可视化</span></li>
+                            <li><i class="fas fa-check"></i> <span data-i18n="unlimited_focus_group">无限专注小组成员</span></li>
+                            <li><i class="fas fa-check"></i> <span data-i18n="exclusive_achievement">专属成就系统</span></li>
+                            <li><i class="fas fa-check"></i> <span data-i18n="priority_support">优先客户支持</span></li>
+                            <li><i class="fas fa-check"></i> <span data-i18n="cross_device_sync">跨设备同步</span></li>
                         </ul>
                     </div>
                     
                     <div class="pricing-footer">
-                        <a href="#download" class="pricing-button">立即购买</a>
+                        <a href="#download" class="pricing-button" data-i18n="buy_now">立即购买</a>
                     </div>
                 </div>
             </div>
             
             <div class="pricing-guarantee">
                 <i class="fas fa-shield-alt"></i>
-                <p>30天无条件退款保证，无风险尝试</p>
+                <p data-i18n="refund_guarantee">30天无条件退款保证，无风险尝试</p>
             </div>
         </div>
     </section>
@@ -671,42 +672,42 @@
     <section class="download-section" id="download">
         <div class="container">
             <div class="download-content">
-                <h2 class="section-title">立即开始你的专注之旅</h2>
-                <p class="section-subtitle">下载 ShareBlackScreen，解锁专注力的游戏</p>
+                <h2 class="section-title" data-i18n="download_title">立即开始你的专注之旅</h2>
+                <p class="section-subtitle" data-i18n="download_subtitle">下载 ShareBlackScreen，解锁专注力的游戏</p>
                 
                 <div class="download-platforms">
                     <a href="#" class="platform-button">
                         <i class="fab fa-windows"></i>
-                        <span>Windows</span>
+                        <span data-i18n="windows">Windows</span>
                     </a>
                     <a href="#" class="platform-button">
                         <i class="fab fa-apple"></i>
-                        <span>macOS</span>
+                        <span data-i18n="macos">macOS</span>
                     </a>
                     <a href="#" class="platform-button">
                         <i class="fab fa-chrome"></i>
-                        <span>Chrome 插件</span>
+                        <span data-i18n="chrome_plugin">Chrome 插件</span>
                     </a>
                     <a href="#" class="platform-button">
                         <i class="fab fa-android"></i>
-                        <span>Android</span>
+                        <span data-i18n="android">Android</span>
                     </a>
                     <a href="#" class="platform-button">
                         <i class="fab fa-app-store-ios"></i>
-                        <span>iOS</span>
+                        <span data-i18n="ios">iOS</span>
                     </a>
                 </div>
                 
                 <div class="download-form">
-                    <h3>获取专属优惠和最新功能更新</h3>
+                    <h3 data-i18n="get_exclusive_offers">获取专属优惠和最新功能更新</h3>
                     <form id="subscribeForm">
                         <div class="form-group">
-                            <input type="email" id="email" placeholder="输入您的邮箱地址" required>
-                            <button type="submit" class="subscribe-button">订阅</button>
+                            <input type="email" id="email" placeholder="输入您的邮箱地址" required data-i18n="enter_email">
+                            <button type="submit" class="subscribe-button" data-i18n="subscribe">订阅</button>
                         </div>
                         <div class="form-privacy">
                             <input type="checkbox" id="privacy" required>
-                            <label for="privacy">我同意接收 ShareBlackScreen 的产品更新和优惠信息</label>
+                            <label for="privacy" data-i18n="privacy_agreement">我同意接收 ShareBlackScreen 的产品更新和优惠信息</label>
                         </div>
                     </form>
                 </div>
@@ -717,210 +718,174 @@
     <!-- FAQ Section -->
     <section class="faq-section" id="faq">
         <div class="container">
-            <h2 class="section-title">常见问题</h2>
-            <p class="section-subtitle">关于 ShareBlackScreen 的一切</p>
+            <h2 class="section-title" data-i18n="faq_title">常见问题</h2>
+            <p class="section-subtitle" data-i18n="faq_subtitle">关于 ShareBlackScreen 的一切</p>
             
             <div class="faq-container">
                 <div class="faq-item">
                     <div class="faq-question">
-                        <h3>ShareBlackScreen 适用于哪些操作系统？</h3>
+                        <h3 data-i18n="faq_os_support">ShareBlackScreen 适用于哪些操作系统？</h3>
                         <span class="faq-toggle"><i class="fas fa-chevron-down"></i></span>
                     </div>
                     <div class="faq-answer">
-                        <p>ShareBlackScreen 目前支持 Windows、macOS、Android、iOS 平台，同时提供 Chrome 浏览器插件版本，几乎覆盖所有主流设备。所有平台版本均支持数据同步，让您在不同设备间无缝切换。</p>
+                        <p data-i18n="faq_os_support_answer">ShareBlackScreen 目前支持 Windows、macOS、Android、iOS 平台，同时提供 Chrome 浏览器插件版本，几乎覆盖所有主流设备。所有平台版本均支持数据同步，让您在不同设备间无缝切换。</p>
                     </div>
                 </div>
                 
                 <div class="faq-item">
                     <div class="faq-question">
-                        <h3>免费版和付费版有什么区别？</h3>
+                        <h3 data-i18n="faq_free_paid_diff">免费版和付费版有什么区别？</h3>
                         <span class="faq-toggle"><i class="fas fa-chevron-down"></i></span>
                     </div>
                     <div class="faq-answer">
-                        <p>免费版提供基础黑屏模式、简单定时器和基础专注统计功能。付费版（专业版和尊享版）提供更多高级功能，如多样化屏幕模式、番茄工作法、社交分享、数据分析等。详细对比请查看<a href="#pricing">价格方案</a>。</p>
+                        <p data-i18n="faq_free_paid_diff_answer">免费版提供基础黑屏模式、简单定时器和基础专注统计功能。付费版（专业版和尊享版）提供更多高级功能，如多样化屏幕模式、番茄工作法、社交分享、数据分析等。详细对比请查看<a href="#pricing">价格方案</a>。</p>
                     </div>
                 </div>
                 
                 <div class="faq-item">
                     <div class="faq-question">
-                        <h3>如何使用社交分享功能？</h3>
+                        <h3 data-i18n="faq_social_share">如何使用社交分享功能？</h3>
                         <span class="faq-toggle"><i class="fas fa-chevron-down"></i></span>
                     </div>
                     <div class="faq-answer">
-                        <p>在应用内完成专注任务后，点击"分享"按钮，选择要分享的社交平台（如微信、微博、QQ等），即可将您的专注成果分享给朋友。您也可以创建或加入专注小组，与朋友一起保持专注。</p>
+                        <p data-i18n="faq_social_share_answer">在应用内完成专注任务后，点击"分享"按钮，选择要分享的社交平台（如微信、微博、QQ等），即可将您的专注成果分享给朋友。您也可以创建或加入专注小组，与朋友一起保持专注。</p>
                     </div>
                 </div>
                 
                 <div class="faq-item">
                     <div class="faq-question">
-                        <h3>购买后可以退款吗？</h3>
+                        <h3 data-i18n="faq_refund">购买后可以退款吗？</h3>
                         <span class="faq-toggle"><i class="fas fa-chevron-down"></i></span>
                     </div>
                     <div class="faq-answer">
-                        <p>是的，我们提供30天无条件退款保证。如果您对产品不满意，可以在购买后30天内联系我们的客服申请全额退款，无需说明理由。</p>
+                        <p data-i18n="faq_refund_answer">是的，我们提供30天无条件退款保证。如果您对产品不满意，可以在购买后30天内联系我们的客服申请全额退款，无需说明理由。</p>
                     </div>
                 </div>
                 
                 <div class="faq-item">
                     <div class="faq-question">
-                        <h3>ShareBlackScreen 会收集我的个人数据吗？</h3>
+                        <h3 data-i18n="faq_data_collection">ShareBlackScreen 会收集我的个人数据吗？</h3>
                         <span class="faq-toggle"><i class="fas fa-chevron-down"></i></span>
                     </div>
                     <div class="faq-answer">
-                        <p>我们非常重视用户隐私。ShareBlackScreen 只会收集必要的使用数据（如专注时长、使用频率等）用于提供服务和改进产品。我们不会收集您的个人敏感信息，也不会将数据分享给第三方。详情请查看我们的<a href="#">隐私政策</a>。</p>
+                        <p data-i18n="faq_data_collection_answer">我们非常重视用户隐私。ShareBlackScreen 只会收集必要的使用数据（如专注时长、使用频率等）用于提供服务和改进产品。我们不会收集您的个人敏感信息，也不会将数据分享给第三方。详情请查看我们的<a href="#">隐私政策</a>。</p>
                     </div>
                 </div>
                 
                 <div class="faq-item">
                     <div class="faq-question">
-                        <h3>如何联系客服获取帮助？</h3>
+                        <h3 data-i18n="faq_contact_support">如何联系客服获取帮助？</h3>
                         <span class="faq-toggle"><i class="fas fa-chevron-down"></i></span>
                     </div>
                     <div class="faq-answer">
-                        <p>您可以通过以下方式联系我们的客服团队：</p>
+                        <p data-i18n="faq_contact_support_intro">您可以通过以下方式联系我们的客服团队：</p>
                         <ul>
-                            <li>邮箱：support@shareblackscreen.com</li>
-                            <li>在线客服：应用内点击"帮助"→"联系客服"</li>
-                            <li>社交媒体：关注我们的<a href="#">微信公众号</a>或<a href="#">微博</a></li>
+                            <li data-i18n="faq_contact_email">邮箱：support@shareblackscreen.com</li>
+                            <li data-i18n="faq_contact_online">在线客服：应用内点击"帮助"→"联系客服"</li>
+                            <li data-i18n="faq_contact_social">社交媒体：关注我们的<a href="#">微信公众号</a>或<a href="#">微博</a></li>
                         </ul>
-                        <p>我们的客服团队会在24小时内回复您的问题。</p>
+                        <p data-i18n="faq_contact_response_time">我们的客服团队会在24小时内回复您的问题。</p>
                     </div>
                 </div>
                 
                 <div class="faq-item">
                     <div class="faq-question">
-                        <h3>如何使用番茄工作法功能？</h3>
+                        <h3 data-i18n="faq_pomodoro">如何使用番茄工作法功能？</h3>
                         <span class="faq-toggle"><i class="fas fa-chevron-down"></i></span>
                     </div>
                     <div class="faq-answer">
-                        <p>在应用主界面选择"番茄工作法"模式，默认设置为25分钟工作，5分钟休息。您可以根据个人习惯调整时间长度。点击"开始"按钮后，程序会自动进入专注状态，并在时间结束时提醒您休息。完成一定次数的番茄钟后，会获得额外的成就奖励。</p>
+                        <p data-i18n="faq_pomodoro_answer">在应用主界面点击"番茄工作法"按钮，设置工作时长（默认25分钟）和休息时长（默认5分钟），然后点击"开始"即可。系统会自动在工作时间和休息时间之间切换，并在每个阶段结束时通知您。</p>
                     </div>
                 </div>
-                
-                <div class="faq-item">
-                    <div class="faq-question">
-                        <h3>专注数据会自动同步吗？</h3>
-                        <span class="faq-toggle"><i class="fas fa-chevron-down"></i></span>
-                    </div>
-                    <div class="faq-answer">
-                        <p>是的，只要您使用同一账号登录，您的专注数据会自动在所有设备间同步。专业版和尊享版用户可以查看更详细的历史数据和分析报告，帮助您了解自己的专注习惯和提升空间。</p>
-                    </div>
-                </div>
-                
-                <div class="faq-item">
-                    <div class="faq-question">
-                        <h3>如何创建自定义专注方案？</h3>
-                        <span class="faq-toggle"><i class="fas fa-chevron-down"></i></span>
-                    </div>
-                    <div class="faq-answer">
-                        <p>在应用的"设置"→"时间方案"中，点击"创建新方案"，您可以自定义专注时长、休息时间、循环次数以及屏幕模式。创建后的方案会保存在您的账户中，随时可以一键启动。尊享版用户还可以设置不同时段自动启动不同的专注方案。</p>
-                    </div>
-                </div>
-                
-                <div class="faq-item">
-                    <div class="faq-question">
-                        <h3>应用会占用大量系统资源吗？</h3>
-                        <span class="faq-toggle"><i class="fas fa-chevron-down"></i></span>
-                    </div>
-                    <div class="faq-answer">
-                        <p>不会。ShareBlackScreen 经过优化，占用极少的系统资源。即使在后台运行，也不会明显影响设备性能。我们的移动版应用也经过特别优化，可以在不影响电池寿命的情况下长时间运行。</p>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="faq-more">
-                <a href="#" class="more-questions-button">
-                    <span>查看更多问题</span>
-                    <i class="fas fa-arrow-right"></i>
-                </a>
             </div>
         </div>
     </section>
-    
+
     <!-- Footer Section -->
     <footer class="footer-section">
         <div class="container">
             <div class="footer-top">
                 <div class="footer-logo">
-                    <img src="img/logo-white.webp" alt="ShareBlackScreen Logo" width="180" height="40">
-                    <p class="footer-slogan">解锁专注力的游戏</p>
+                    <img src="img/logo-white.svg" alt="ShareBlackScreen Logo" width="180" height="40" data-i18n="footer_logo_alt">
+                    <p class="footer-slogan" data-i18n="footer_slogan">解锁专注力的游戏</p>
                 </div>
                 
                 <div class="footer-nav">
                     <div class="footer-nav-column">
-                        <h4>产品</h4>
+                        <h4 data-i18n="footer_product">产品</h4>
                         <ul>
-                            <li><a href="#features">功能</a></li>
-                            <li><a href="#pricing">价格</a></li>
-                            <li><a href="#download">下载</a></li>
-                            <li><a href="#faq">常见问题</a></li>
+                            <li><a href="#features" data-i18n="footer_features">功能</a></li>
+                            <li><a href="#pricing" data-i18n="footer_pricing">价格</a></li>
+                            <li><a href="#download" data-i18n="footer_download">下载</a></li>
+                            <li><a href="#faq" data-i18n="footer_faq">常见问题</a></li>
                         </ul>
                     </div>
                     
                     <div class="footer-nav-column">
-                        <h4>资源</h4>
+                        <h4 data-i18n="footer_resources">资源</h4>
                         <ul>
-                            <li><a href="#">博客</a></li>
-                            <li><a href="#">使用教程</a></li>
-                            <li><a href="#">专注技巧</a></li>
-                            <li><a href="#">API文档</a></li>
+                            <li><a href="#" data-i18n="footer_blog">博客</a></li>
+                            <li><a href="#" data-i18n="footer_tutorials">使用教程</a></li>
+                            <li><a href="#" data-i18n="footer_focus_tips">专注技巧</a></li>
+                            <li><a href="#" data-i18n="footer_api_docs">API文档</a></li>
                         </ul>
                     </div>
                     
                     <div class="footer-nav-column">
-                        <h4>公司</h4>
+                        <h4 data-i18n="footer_company">公司</h4>
                         <ul>
-                            <li><a href="#">关于我们</a></li>
-                            <li><a href="#">联系我们</a></li>
-                            <li><a href="#">加入我们</a></li>
-                            <li><a href="#">媒体报道</a></li>
+                            <li><a href="#" data-i18n="footer_about">关于我们</a></li>
+                            <li><a href="#" data-i18n="footer_contact">联系我们</a></li>
+                            <li><a href="#" data-i18n="footer_join">加入我们</a></li>
+                            <li><a href="#" data-i18n="footer_media">媒体报道</a></li>
                         </ul>
                     </div>
                     
                     <div class="footer-nav-column">
-                        <h4>法律</h4>
+                        <h4 data-i18n="footer_legal">法律</h4>
                         <ul>
-                            <li><a href="#">服务条款</a></li>
-                            <li><a href="#">隐私政策</a></li>
-                            <li><a href="#">Cookie政策</a></li>
-                            <li><a href="#">GDPR合规</a></li>
+                            <li><a href="#" data-i18n="footer_terms">服务条款</a></li>
+                            <li><a href="#" data-i18n="footer_privacy">隐私政策</a></li>
+                            <li><a href="#" data-i18n="footer_cookie">Cookie政策</a></li>
+                            <li><a href="#" data-i18n="footer_gdpr">GDPR合规</a></li>
                         </ul>
                     </div>
                 </div>
                 
                 <div class="footer-social">
-                    <h4>关注我们</h4>
+                    <h4 data-i18n="footer_follow">关注我们</h4>
                     <div class="social-icons">
-                        <a href="#" class="social-icon"><i class="fab fa-weixin"></i></a>
-                        <a href="#" class="social-icon"><i class="fab fa-weibo"></i></a>
-                        <a href="#" class="social-icon"><i class="fab fa-qq"></i></a>
-                        <a href="#" class="social-icon"><i class="fab fa-github"></i></a>
-                        <a href="#" class="social-icon"><i class="fab fa-bilibili"></i></a>
+                        <a href="#" class="social-icon" aria-label="WeChat"><i class="fab fa-weixin"></i></a>
+                        <a href="#" class="social-icon" aria-label="Weibo"><i class="fab fa-weibo"></i></a>
+                        <a href="#" class="social-icon" aria-label="QQ"><i class="fab fa-qq"></i></a>
+                        <a href="#" class="social-icon" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                        <a href="#" class="social-icon" aria-label="Bilibili"><i class="fab fa-bilibili"></i></a>
                     </div>
                 </div>
             </div>
             
             <div class="footer-bottom">
                 <div class="copyright">
-                    <p>&copy; 2023 ShareBlackScreen. 保留所有权利。</p>
+                    <p data-i18n="footer_copyright">&copy; 2023 ShareBlackScreen. 保留所有权利。</p>
+                    <p class="affiliate-disclaimer" data-i18n="affiliate_disclaimer">本页面包含联盟营销链接。当您通过这些链接购买产品时，我们可能会获得佣金，但这不会影响您支付的价格。</p>
                 </div>
                 
                 <div class="app-badges">
                     <a href="#" class="app-badge">
-                        <img src="img/app-store-badge.webp" alt="App Store" width="120" height="40">
+                        <img src="img/app-store-badge.svg" alt="App Store" width="120" height="40" data-i18n="app_store_badge_alt">
                     </a>
                     <a href="#" class="app-badge">
-                        <img src="img/google-play-badge.webp" alt="Google Play" width="120" height="40">
+                        <img src="img/google-play-badge.svg" alt="Google Play" width="120" height="40" data-i18n="google_play_badge_alt">
                     </a>
                 </div>
                 
                 <!-- 在footer部分的语言选择器 -->
                 <div class="language-selector">
                     <select id="languageSelect">
-                        <option value="zh-CN" selected>简体中文</option>
-                        <option value="en">English</option>
-                        <option value="ja">日本語</option>
-                        <option value="ko">한국어</option>
+                        <option value="zh-CN" selected data-i18n="lang_zh_cn">简体中文</option>
+                        <option value="en" data-i18n="lang_en">English</option>
+                        <option value="ja" data-i18n="lang_ja">日本語</option>
+                        <option value="ko" data-i18n="lang_ko">한국어</option>
                     </select>
                 </div>
             </div>
@@ -935,10 +900,10 @@
     <!-- Cookie Consent -->
     <div class="cookie-consent" id="cookieConsent">
         <div class="cookie-content">
-            <p>我们使用 Cookie 来提升您的浏览体验、分析网站流量并提供个性化内容。继续使用本网站即表示您同意我们的<a href="#">Cookie 政策</a>。</p>
+            <p data-i18n="cookie_consent_text">我们使用 Cookie 来提升您的浏览体验、分析网站流量并提供个性化内容。继续使用本网站即表示您同意我们的<a href="#">Cookie 政策</a>。</p>
             <div class="cookie-buttons">
-                <button class="cookie-accept" id="acceptCookies">接受</button>
-                <button class="cookie-settings" id="cookieSettings">设置</button>
+                <button class="cookie-accept" id="acceptCookies" data-i18n="cookie_accept">接受</button>
+                <button class="cookie-settings" id="cookieSettings" data-i18n="cookie_settings">设置</button>
             </div>
         </div>
     </div>
@@ -957,8 +922,9 @@
     <script src="js/playground.js"></script>
     <script src="js/social-focus.js"></script>
     <script src="js/time-plan.js"></script>
+    <script src="js/unsplash-avatars.js"></script>
+    <!-- 先加载auto-language.js，再加载i18n.js -->
+    <script src="js/auto-language.js"></script>
     <script src="js/i18n.js"></script>
-<!-- 在i18n.js之前添加 -->
-    <script src="js/auto-language.js"></script>    
 </body>
 </html>

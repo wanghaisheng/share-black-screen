@@ -67,12 +67,13 @@ function loadAndApplyTranslations(lang) {
     // 显示加载指示器
     showLoadingIndicator();
     
-    // 修复：使用绝对路径加载翻译文件
-    fetch(`/locale/${lang}.json`)
+    // 修改路径加载逻辑，先尝试相对路径
+    fetch(`locale/${lang}.json`)
         .then(response => {
             if (!response.ok) {
-                // 修复：尝试使用相对路径
-                return fetch(`locale/${lang}.json`);
+                console.warn(`无法从locale/加载翻译文件，尝试其他路径: ${response.status}`);
+                // 尝试绝对路径
+                return fetch(`/locale/${lang}.json`);
             }
             return response;
         })
@@ -83,15 +84,26 @@ function loadAndApplyTranslations(lang) {
             return response.json();
         })
         .then(globalTranslations => {
-            // 加载当前风格特有的翻译
+            // 尝试加载当前风格特有的翻译，先尝试相对路径
             return fetch(`i18n/${lang}.json`)
                 .then(response => {
                     if (!response.ok) {
+                        // 尝试绝对路径
+                        return fetch(`/i18n/${lang}.json`);
+                    }
+                    return response;
+                })
+                .then(response => {
+                    if (!response.ok) {
                         // 如果风格翻译不存在，使用空对象
-                        console.warn(`风格翻译不存在: ${lang}`);
+                        console.log('风格翻译不存在，使用空对象');
                         return {};
                     }
                     return response.json();
+                })
+                .catch(error => {
+                    console.log('加载风格翻译出错，使用空对象', error);
+                    return {};
                 })
                 .then(styleTranslations => {
                     // 合并翻译
@@ -140,6 +152,9 @@ function applyTranslations(translations) {
             console.warn(`未找到翻译键: ${key}`);
         }
     });
+    
+    // 查找并翻译没有data-i18n属性但需要翻译的常见UI元素
+    translateCommonUIElements(translations);
     
     // 更新页面标题
     if (translations['page_title']) {
@@ -218,3 +233,95 @@ window.i18n = {
     getCurrentLanguage: () => currentLanguage,
     getSupportedLanguages: () => supportedLanguages
 };
+
+/**
+ * 翻译没有data-i18n属性的常见UI元素
+ * @param {Object} translations - 翻译对象
+ */
+function translateCommonUIElements(translations) {
+    // 翻译屏幕模式相关元素
+    translateElementsBySelector('.mode-buttons .mode-button[data-mode="black"]', translations['black_screen_mode'] || '黑屏');
+    translateElementsBySelector('.mode-buttons .mode-button[data-mode="white"]', translations['white_screen_mode'] || '白屏');
+    translateElementsBySelector('.mode-buttons .mode-button[data-mode="blue"]', translations['blue_screen_mode'] || '蓝屏');
+    translateElementsBySelector('.mode-buttons .mode-button[data-mode="green"]', translations['green_screen_mode'] || '绿屏');
+    translateElementsBySelector('.mode-buttons .mode-button[data-mode="gradient"]', translations['gradient_mode'] || '渐变');
+    
+    // 翻译控制组标题
+    translateElementsBySelector('.control-group h3:contains("屏幕模式")', translations['screen_modes'] || '屏幕模式');
+    translateElementsBySelector('.control-group h3:contains("透明度调节")', translations['transparency'] || '透明度调节');
+    translateElementsBySelector('.control-group h3:contains("时间管理")', translations['time_management_tab'] || '时间管理');
+    translateElementsBySelector('.control-group h3:contains("番茄工作法")', translations['pomodoro'] || '番茄工作法');
+    translateElementsBySelector('.control-group h3:contains("社交专注")', translations['social_features'] || '社交专注');
+    
+    // 翻译时间管理相关元素
+    translateElementsBySelector('.countdown-display-control span', translations['show_countdown'] || '显示倒计时');
+    translateElementsBySelector('.timer-preset[data-time="5"]', translations['5_minutes'] || '5分钟');
+    translateElementsBySelector('.timer-preset[data-time="25"]', translations['25_minutes'] || '25分钟');
+    translateElementsBySelector('.timer-preset[data-time="50"]', translations['50_minutes'] || '50分钟');
+    translateElementsBySelector('#endTimeBtn', translations['end_time'] || '结束时间');
+    translateElementsBySelector('.custom-timer span', translations['minutes'] || '分钟');
+    translateElementsBySelector('#startTimer', translations['start_focus'] || '开始专注');
+    translateElementsBySelector('#setEndTime', translations['set_end_time'] || '设置结束时间');
+    translateElementsBySelector('.schedule-timer span', translations['minutes_to_start'] || '分钟后启动');
+    translateElementsBySelector('#scheduleButton', translations['schedule_start'] || '预约启动');
+    translateElementsBySelector('#createTimePlan', translations['create_time_plan'] || '创建时间方案');
+    
+    // 翻译番茄工作法相关元素
+    translateElementsBySelector('#startPomodoro', translations['start_pomodoro'] || '开始番茄工作法');
+    translateElementsBySelector('#pomodoroStatus:contains("准备就绪")', translations['ready'] || '准备就绪');
+    
+    // 翻译社交专注相关元素
+    translateElementsBySelector('.focus-session h4', translations['create_focus_session'] || '创建专注会话');
+    translateElementsBySelector('#sessionName', translations['focus_session_name'] || '专注会话名称', 'placeholder');
+    translateElementsBySelector('#createSession', translations['create_session'] || '创建专注会话');
+    translateElementsBySelector('.invite-friends h4', translations['invite_friends'] || '邀请好友');
+    translateElementsBySelector('#friendEmail', translations['friend_email'] || '好友邮箱地址', 'placeholder');
+    translateElementsBySelector('#inviteFriend', translations['invite_friend'] || '邀请好友');
+    
+    // 翻译页面其他部分
+    translateElementsBySelector('.section-title:contains("在线体验")', translations['online_experience'] || '在线体验 ShareBlackScreen');
+    translateElementsBySelector('.section-subtitle:contains("无需下载")', translations['no_download_needed'] || '无需下载，立即体验我们的核心功能');
+    translateElementsBySelector('.playground-cta p', translations['more_features'] || '想要体验更多高级功能？');
+    translateElementsBySelector('.playground-cta .primary-button', translations['download_full'] || '立即下载完整版');
+}
+
+/**
+ * 根据选择器翻译元素
+ * @param {string} selector - CSS选择器
+ * @param {string} translation - 翻译文本
+ * @param {string} attribute - 要翻译的属性，默认为textContent
+ */
+function translateElementsBySelector(selector, translation, attribute = 'textContent') {
+    try {
+        // 扩展jQuery的contains选择器功能
+        if (selector.includes(':contains(')) {
+            const parts = selector.split(':contains(');
+            const baseSelector = parts[0];
+            const textToMatch = parts[1].slice(0, -1).replace(/\"/g, '');
+            
+            const elements = document.querySelectorAll(baseSelector);
+            elements.forEach(el => {
+                if (el.textContent.includes(textToMatch)) {
+                    if (attribute === 'placeholder') {
+                        el.placeholder = translation;
+                    } else {
+                        el[attribute] = translation;
+                    }
+                }
+            });
+            return;
+        }
+        
+        // 常规选择器
+        const elements = document.querySelectorAll(selector);
+        elements.forEach(el => {
+            if (attribute === 'placeholder') {
+                el.placeholder = translation;
+            } else {
+                el[attribute] = translation;
+            }
+        });
+    } catch (error) {
+        console.error(`翻译元素错误 (${selector}):`, error);
+    }
+}
