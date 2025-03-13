@@ -173,6 +173,8 @@
   "start_pomodoro": "Start Pomodoro",
   "ready": "Ready",
   "social_focus": "Social Focus",
+  "friend_email_placeholder": "Email Address",
+
   "create_focus_session": "Create Focus Session",
   "create_focus_session_btn": "Create Focus Session",
   "invite_friends": "Invite Friends",

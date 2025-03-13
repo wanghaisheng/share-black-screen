@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600">
+  <!-- Background -->
+  <rect width="800" height="600" fill="#f8f9fa" rx="15" ry="15"/>
+  
+  <!-- App Window Frame -->
+  <rect x="100" y="50" width="600" height="500" rx="10" ry="10" fill="#ffffff" stroke="#e0e0e0" stroke-width="2"/>
+  
+  <!-- App Header -->
+  <rect x="100" y="50" width="600" height="50" rx="10" ry="10" fill="#333333"/>
+  <rect x="100" y="90" width="600" height="10" fill="#444444"/>
+  
+  <!-- Window Controls -->
+  <circle cx="130" cy="75" r="8" fill="#ff5f57"/>
+  <circle cx="155" cy="75" r="8" fill="#febc2e"/>
+  <circle cx="180" cy="75" r="8" fill="#28c840"/>
+  
+  <!-- App Title -->
+  <text x="400" y="80" font-family="Arial, sans-serif" font-size="16" fill="#ffffff" text-anchor="middle">ShareBlackScreen</text>
+  
+  <!-- Sidebar -->
+  <rect x="100" y="100" width="150" height="450" fill="#f0f0f0"/>
+  
+  <!-- Sidebar Menu Items -->
+  <rect x="110" y="120" width="130" height="40" rx="5" ry="5" fill="#333333"/>
+  <text x="175" y="145" font-family="Arial, sans-serif" font-size="14" fill="#ffffff" text-anchor="middle">Screen Modes</text>
+  
+  <rect x="110" y="170" width="130" height="40" rx="5" ry="5" fill="#f0f0f0" stroke="#dddddd" stroke-width="1"/>
+  <text x="175" y="195" font-family="Arial, sans-serif" font-size="14" fill="#333333" text-anchor="middle">Time Management</text>
+  
+  <rect x="110" y="220" width="130" height="40" rx="5" ry="5" fill="#f0f0f0" stroke="#dddddd" stroke-width="1"/>
+  <text x="175" y="245" font-family="Arial, sans-serif" font-size="14" fill="#333333" text-anchor="middle">Social Features</text>
+  
+  <rect x="110" y="270" width="130" height="40" rx="5" ry="5" fill="#f0f0f0" stroke="#dddddd" stroke-width="1"/>
+  <text x="175" y="295" font-family="Arial, sans-serif" font-size="14" fill="#333333" text-anchor="middle">Data Analysis</text>
+  
+  <!-- Main Content Area -->
+  <rect x="250" y="100" width="450" height="450" fill="#ffffff"/>
+  
+  <!-- Screen Mode Options -->
+  <text x="475" y="140" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#333333" text-anchor="middle">Screen Modes</text>
+  
+  <!-- Color Mode Samples -->
+  <rect x="280" y="170" width="100" height="80" rx="5" ry="5" fill="#000000"/>
+  <text x="330" y="270" font-family="Arial, sans-serif" font-size="14" fill="#333333" text-anchor="middle">Black Screen</text>
+  
+  <rect x="400" y="170" width="100" height="80" rx="5" ry="5" fill="#ffffff" stroke="#dddddd" stroke-width="1"/>
+  <text x="450" y="270" font-family="Arial, sans-serif" font-size="14" fill="#333333" text-anchor="middle">White Screen</text>
+  
+  <rect x="520" y="170" width="100" height="80" rx="5" ry="5" fill="#3498db"/>
+  <text x="570" y="270" font-family="Arial, sans-serif" font-size="14" fill="#333333" text-anchor="middle">Blue Screen</text>
+  
+  <rect x="280" y="300" width="100" height="80" rx="5" ry="5" fill="#2ecc71"/>
+  <text x="330" y="400" font-family="Arial, sans-serif" font-size="14" fill="#333333" text-anchor="middle">Green Screen</text>
+  
+  <!-- Gradient Sample -->
+  <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+    <stop offset="0%" stop-color="#9b59b6" />
+    <stop offset="100%" stop-color="#3498db" />
+  </linearGradient>
+  <rect x="400" y="300" width="100" height="80" rx="5" ry="5" fill="url(#gradient)"/>
+  <text x="450" y="400" font-family="Arial, sans-serif" font-size="14" fill="#333333" text-anchor="middle">Gradient</text>
+  
+  <!-- Opacity Slider -->
+  <text x="475" y="450" font-family="Arial, sans-serif" font-size="16" fill="#333333" text-anchor="middle">Opacity Adjustment</text>
+  <rect x="325" y="470" width="300" height="10" rx="5" ry="5" fill="#e0e0e0"/>
+  <circle cx="475" cy="475" r="15" fill="#333333"/>
+  
+  <!-- Start Focus Button -->
+  <rect x="375" y="510" width="200" height="40" rx="20" ry="20" fill="#333333"/>
+  <text x="475" y="535" font-family="Arial, sans-serif" font-size="16" fill="#ffffff" text-anchor="middle">Start Focus</text>
+</svg>
