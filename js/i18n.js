@@ -325,3 +325,16 @@ function translateElementsBySelector(selector, translation, attribute = 'textCon
         console.error(`翻译元素错误 (${selector}):`, error);
     }
 }
+
+// 在切换语言的函数中添加以下代码
+function updatePlaceholders() {
+    const elementsWithPlaceholder = document.querySelectorAll('[data-i18n-placeholder]');
+    elementsWithPlaceholder.forEach(element => {
+        const key = element.getAttribute('data-i18n-placeholder');
+        if (key && translations[currentLang][key]) {
+            element.placeholder = translations[currentLang][key];
+        }
+    });
+}
+
+// 在加载语言或切换语言后调用此函数
